@@ -4,11 +4,51 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YukikaHub.UI"
+        xmlns:controls="clr-namespace:YukikaHub.UI.UserControls" 
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="760" Width="1280"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" 
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <Brush x:Key="NavigationBackGround_Color">#FFFFB4CC</Brush>
+        <Brush x:Key="TopBar_Brush">#f7527e</Brush>
+        <Color x:Key="TopBar_Color">#f7527e</Color>
+    </Window.Resources>
+    
     <Grid>
-        <Button Content="Welcome"
-                HorizontalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <controls:TopBar x:Name="TopBar"
+                         Grid.ColumnSpan="2"
+                         Panel.ZIndex="1"
+                         MouseLeftButtonDown="Window_MouseLeftButtonDown"/>
+        <controls:BasicToolbar Grid.Column="1" Panel.ZIndex="2"/>
+
+        <Grid Background="{StaticResource NavigationBackGround_Color}"
+              Margin="0 50 0 0">
+            <ListView>
+                <ListView.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontSize" Value="24"/>
+                        <Setter Property="Margin" Value="10 0"/>
+                    </Style>
+                </ListView.Resources>
+                <ListViewItem>
+                    <TextBlock Text="Albums"/>
+                </ListViewItem>
+                <ListViewItem>
+                    <TextBlock Text="Albums"/>
+                </ListViewItem>
+                <ListViewItem>
+                    <TextBlock Text="Albums"/>
+                </ListViewItem>
+            </ListView>
+        </Grid>
     </Grid>
 </Window>

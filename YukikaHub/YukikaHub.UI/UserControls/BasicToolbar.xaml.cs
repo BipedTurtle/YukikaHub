@@ -12,25 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using YukikaHub.UI.ViewModels;
 
-namespace YukikaHub.UI
+namespace YukikaHub.UI.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for BasicToolbar.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class BasicToolbar : UserControl
     {
-        public MainWindow(MainViewModel mainViewModel)
+        public BasicToolbar()
         {
             InitializeComponent();
-
-            DataContext = mainViewModel;
         }
 
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void CloseApp_Click(object sender, RoutedEventArgs e)
         {
-            DragMove();
+            Application.Current.Shutdown();
         }
     }
 }

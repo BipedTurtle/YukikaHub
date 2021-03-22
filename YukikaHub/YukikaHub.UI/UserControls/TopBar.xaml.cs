@@ -12,25 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using YukikaHub.UI.ViewModels;
 
-namespace YukikaHub.UI
+namespace YukikaHub.UI.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TopBar.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TopBar : UserControl
     {
-        public MainWindow(MainViewModel mainViewModel)
+        public TopBar()
         {
             InitializeComponent();
-
-            DataContext = mainViewModel;
-        }
-
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
         }
     }
 }
