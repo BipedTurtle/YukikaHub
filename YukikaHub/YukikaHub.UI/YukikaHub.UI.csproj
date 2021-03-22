@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Events\" />
-    <Folder Include="Views\" />
   </ItemGroup>
 
 </Project>

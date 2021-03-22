@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:YukikaHub.UI"
         xmlns:controls="clr-namespace:YukikaHub.UI.UserControls" 
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:view="clr-namespace:YukikaHub.UI.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="760" Width="1280"
-        WindowStartupLocation="CenterScreen"
-        WindowStyle="None" 
+        WindowStartupLocation="CenterScreen" WindowStyle="None" 
         ResizeMode="NoResize">
     <Window.Resources>
         <Brush x:Key="NavigationBackGround_Color">#FFFFB4CC</Brush>
@@ -19,8 +19,8 @@
     
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2.5*"/>
         </Grid.ColumnDefinitions>
 
         <controls:TopBar x:Name="TopBar"
@@ -29,26 +29,6 @@
                          MouseLeftButtonDown="Window_MouseLeftButtonDown"/>
         <controls:BasicToolbar Grid.Column="1" Panel.ZIndex="2"/>
 
-        <Grid Background="{StaticResource NavigationBackGround_Color}"
-              Margin="0 50 0 0">
-            <ListView>
-                <ListView.Resources>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="FontSize" Value="24"/>
-                        <Setter Property="Margin" Value="10 0"/>
-                    </Style>
-                </ListView.Resources>
-                <ListViewItem>
-                    <TextBlock Text="Albums"/>
-                </ListViewItem>
-                <ListViewItem>
-                    <TextBlock Text="Albums"/>
-                </ListViewItem>
-                <ListViewItem>
-                    <TextBlock Text="Albums"/>
-                </ListViewItem>
-            </ListView>
-        </Grid>
+        <view:NavigationView Grid.Column="0"/>
     </Grid>
 </Window>
