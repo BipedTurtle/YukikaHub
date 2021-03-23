@@ -11,12 +11,7 @@
         Title="MainWindow" Height="760" Width="1280"
         WindowStartupLocation="CenterScreen" WindowStyle="None" 
         ResizeMode="NoResize">
-    <Window.Resources>
-        <Brush x:Key="NavigationBackGround_Color">#FFFFB4CC</Brush>
-        <Brush x:Key="TopBar_Brush">#f7527e</Brush>
-        <Color x:Key="TopBar_Color">#f7527e</Color>
-    </Window.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -30,5 +25,19 @@
         <controls:BasicToolbar Grid.Column="1" Panel.ZIndex="2"/>
 
         <view:NavigationView Grid.Column="0"/>
+
+        <UniformGrid Grid.Column="1"
+                     Margin="0 70 0 0"
+                     Columns="3"
+                     VerticalAlignment="Top">
+            <Image Source="Images/Lovemonth.jpg"
+                   Width="200"/>
+            <Image Source="Images/Lovemonth.jpg"
+                   Width="200"/>
+            <Image Source="Images/Soul Lady.jpg"
+                   Width="200"/>
+            <Image Source="Images/Soul Lady.jpg"
+                   Width="200"/>
+        </UniformGrid>
     </Grid>
 </Window>
