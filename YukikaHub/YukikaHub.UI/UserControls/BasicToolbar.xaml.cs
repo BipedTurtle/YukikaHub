@@ -29,5 +29,11 @@ namespace YukikaHub.UI.UserControls
         {
             Application.Current.Shutdown();
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var settingsButton = sender as FrameworkElement;
+            settingsButton.ContextMenu.IsOpen = true;
+        }
     }
 }

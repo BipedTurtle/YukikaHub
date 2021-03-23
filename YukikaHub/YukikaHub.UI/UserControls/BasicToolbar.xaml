@@ -7,31 +7,47 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel Name="BasicToolBar"
-                        Orientation="Horizontal"
-                        Grid.Column="1"
-                        Width="170" Height="50"
-                        HorizontalAlignment="Right" VerticalAlignment="Top">
-            <Button Width="50" Height="{Binding ElementName=BasicToolBar, Path=Height}"
-                        Background="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0"
-                        Padding="0">
-                <md:PackIcon Kind="InfoCircle"
-                                 Width="50" Height="{Binding ElementName=BasicToolBar, Path=Height}"/>
-            </Button>
-            <Button Width="50" Height="{Binding ElementName=BasicToolBar, Path=Height}"
-                        Background="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0"
-                        Padding="0" Margin="10 0">
-                <md:PackIcon Kind="Settings"
-                                 Width="50" Height="{Binding ElementName=BasicToolBar, Path=Height}"/>
-            </Button>
-            <Button Width="50" Height="{Binding ElementName=BasicToolBar, Path=Height}"
+        <StackPanel x:Name="BasicToolBar"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Menu VerticalAlignment="Bottom"
+                  Background="Transparent">
+                <MenuItem Height="50" Width="50">
+                    <MenuItem.Header>
+                        <StackPanel Margin="-16,0,-25,0">
+                            <md:PackIcon Kind="Information"
+                                         Foreground="White"
+                                         Width="50" Height="50"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem HorizontalAlignment="Center" Height="50" Width="50"
+                          Click="MenuItem_Click" Name="menuItem"
+                          Padding="0">
+                    <MenuItem.Header>
+                        <StackPanel Margin="0,0,-25,0">
+                            <md:PackIcon Kind="Settings" Foreground="White"
+                                        Width="50" Height="50"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                    <MenuItem.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Developer Mode"/>
+                            <MenuItem Header="User Mode"/>
+                        </ContextMenu>
+                    </MenuItem.ContextMenu>
+                </MenuItem>
+            </Menu>
+            <Button Width="50" Height="50"
                         Background="#FFFF3535" BorderBrush="{x:Null}" BorderThickness="0"
                         Padding="0"
                         Style="{x:Null}" Foreground="White"
+                        VerticalAlignment="Bottom"
                         Click="CloseApp_Click">
                 <md:PackIcon Kind="Close"
                                  Width="50" Height="{Binding ElementName=BasicToolBar, Path=Height}"/>
             </Button>
+
         </StackPanel>
     </Grid>
 </UserControl>

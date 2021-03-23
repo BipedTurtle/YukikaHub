@@ -12,6 +12,11 @@
         WindowStartupLocation="CenterScreen" WindowStyle="None" 
         ResizeMode="NoResize">
 
+    <Window.Resources>
+        <Image x:Key="lovemonth"
+               Source="C:\Users\참관자\source\repos\WPF Projects\YukikaHub\YukikaHub\YukikaHub.UI\Images\Lovemonth.jpg"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -26,18 +31,18 @@
 
         <view:NavigationView Grid.Column="0"/>
 
-        <UniformGrid Grid.Column="1"
-                     Margin="0 70 0 0"
-                     Columns="3"
-                     VerticalAlignment="Top">
-            <Image Source="Images/Lovemonth.jpg"
-                   Width="200"/>
-            <Image Source="Images/Lovemonth.jpg"
-                   Width="200"/>
-            <Image Source="Images/Soul Lady.jpg"
-                   Width="200"/>
-            <Image Source="Images/Soul Lady.jpg"
-                   Width="200"/>
-        </UniformGrid>
+        <ListView Grid.Column="1"
+                 Margin="0 50 0 0">
+            <ListView.Resources>
+                <Style TargetType="Image">
+                    <Setter Property="Width" Value="200"/>
+                </Style>
+            </ListView.Resources>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
     </Grid>
 </Window>
