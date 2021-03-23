@@ -20,9 +20,24 @@ namespace YukikaHub.UI.Views
     /// </summary>
     public partial class NavigationView : UserControl
     {
+        private double _selectorOffset;
+        private double _lvItemHeight;
         public NavigationView()
         {
             InitializeComponent();
+
+            _selectorOffset = BaseGrid.Margin.Top;
+
+            var HeightSetter = lv.ItemContainerStyle.Setters
+                    .FirstOrDefault(s => ((Setter)s).Property.Name == "Height") as Setter;
+            _lvItemHeight = (double)HeightSetter.Value;
+        }
+
+        private void OnNavigation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selector_transition.OnApplyTemplate();
+            var newMarginTop = _selectorOffset + lv.SelectedIndex * _lvItemHeight;
+            selector.Margin = new Thickness(0, newMarginTop, 0, 0);
         }
     }
 }

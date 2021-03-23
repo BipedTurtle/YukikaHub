@@ -23,10 +23,24 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Background="{StaticResource NavigationBackGround_Color}"
-              Margin="0 50 0 0">
-        <ListView MinWidth="250"
-                      Margin="0 50 0 0">
+    <Grid x:Name="BaseGrid"
+          Background="{StaticResource NavigationBackGround_Color}"
+          Margin="0 50 0 0">
+        <md:TransitioningContent x:Name="selector_transition" OpeningEffect="{md:TransitionEffect Kind=FadeIn, Duration=0:0:.7}">
+            <Grid x:Name="selector"
+                  Width="10" Height="50"
+                  Margin="0 50 0 0"
+                  Background="#FF3BFDD1"
+                  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </md:TransitioningContent>
+        <ListView MinWidth="250" Name="lv"
+                  Margin="10 50 0 0"
+                  SelectionChanged="OnNavigation_SelectionChanged">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+                    <Setter Property="Height" Value="50"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListViewItem>
                 <StackPanel Orientation="Horizontal">
                     <md:PackIcon Kind="Album"/>
@@ -60,8 +74,6 @@
                     All rights reserved to YUKIKA ENT. <LineBreak/>
                     For further contact, use the links below
             </TextBlock>
-            <StackPanel Orientation="Horizontal">
-
-            </StackPanel>
         </StackPanel>
-    </Grid></UserControl>
+    </Grid>
+</UserControl>
