@@ -26,7 +26,7 @@ namespace YukikaHub.UI.Views
         {
             InitializeComponent();
 
-            _selectorOffset = BaseGrid.Margin.Top;
+            _selectorOffset = selector.Margin.Top;
 
             var HeightSetter = lv.ItemContainerStyle.Setters
                     .FirstOrDefault(s => ((Setter)s).Property.Name == "Height") as Setter;

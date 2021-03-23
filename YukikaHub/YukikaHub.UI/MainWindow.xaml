@@ -16,12 +16,16 @@
         <Image x:Key="lovemonth"
                Source="C:\Users\참관자\source\repos\WPF Projects\YukikaHub\YukikaHub\YukikaHub.UI\Images\Lovemonth.jpg"/>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="710"/>
+        </Grid.RowDefinitions>
 
         <controls:TopBar x:Name="TopBar"
                          Grid.ColumnSpan="2"
@@ -29,10 +33,10 @@
                          MouseLeftButtonDown="Window_MouseLeftButtonDown"/>
         <controls:BasicToolbar Grid.Column="1" Panel.ZIndex="2"/>
 
-        <view:NavigationView Grid.Column="0"/>
+        <view:NavigationView Grid.Column="0" Grid.Row="1"/>
 
-        <ListView Grid.Column="1"
-                 Margin="0 50 0 0">
+        <view:AddAlbumView Grid.Column="1" Grid.Row="1"/>
+        <!--<ListView Grid.Column="1" Grid.Row="1">
             <ListView.Resources>
                 <Style TargetType="Image">
                     <Setter Property="Width" Value="200"/>
@@ -43,6 +47,6 @@
                     <UniformGrid Columns="3"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
-        </ListView>
+        </ListView>-->
     </Grid>
 </Window>

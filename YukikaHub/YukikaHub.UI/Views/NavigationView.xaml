@@ -24,8 +24,7 @@
     </UserControl.Resources>
 
     <Grid x:Name="BaseGrid"
-          Background="{StaticResource NavigationBackGround_Color}"
-          Margin="0 50 0 0">
+          Background="{StaticResource NavigationBackGround_Color}">
         <md:TransitioningContent x:Name="selector_transition" OpeningEffect="{md:TransitionEffect Kind=FadeIn, Duration=0:0:.7}">
             <Grid x:Name="selector"
                   Width="10" Height="50"
