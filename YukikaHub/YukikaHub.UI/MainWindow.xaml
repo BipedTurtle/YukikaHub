@@ -8,7 +8,7 @@
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:view="clr-namespace:YukikaHub.UI.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="760" Width="1280"
+        Title="MainWindow" Height="960" Width="1280"
         WindowStartupLocation="CenterScreen" WindowStyle="None" 
         ResizeMode="NoResize">
 
@@ -24,7 +24,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="710"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <controls:TopBar x:Name="TopBar"
