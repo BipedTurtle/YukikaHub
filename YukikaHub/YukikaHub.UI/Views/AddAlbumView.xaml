@@ -14,7 +14,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -62,19 +62,24 @@
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel Grid.Row="1" Grid.ColumnSpan="2"
-                        Orientation="Horizontal">
-                <DataGrid AutoGenerateColumns="False" Width="auto"
+            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <DataGrid Grid.Column="0"
+                          AutoGenerateColumns="False" Width="auto"
                           Margin="20 0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Song"/>
-                        <DataGridTextColumn Header="Duration"/>
-                        <DataGridTextColumn Header="Composer"/>
-                        <DataGridTextColumn Header="Lyricist"/>
-                        <DataGridTextColumn Header="Ratings"/> <!--Challenge: make ratings row appear as an image of five stars, not a number-->
+                        <DataGridTextColumn Header="Song" Width="*"/>
+                        <DataGridTextColumn Header="Duration" Width="*"/>
+                        <DataGridTextColumn Header="Composer" Width="*"/>
+                        <DataGridTextColumn Header="Lyricist" Width="*"/>
+                        <DataGridTextColumn Header="Ratings" Width="*"/> <!--Challenge: make ratings row appear as an image of five stars, not a number-->
                     </DataGrid.Columns>
                 </DataGrid>
-                <StackPanel styling:MarginSetter.ChildMargin="5 7">
+                <StackPanel Grid.Column="1"
+                            styling:MarginSetter.ChildMargin="5 7">
                     <StackPanel.Resources>
                         <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                             <Setter Property="Height" Value="45"/>
@@ -85,7 +90,18 @@
                     <Button Content="Remove" 
                             Background="#FFE43D3D" BorderBrush="{x:Null}"/>
                 </StackPanel>
-            </StackPanel>
+            </Grid>
+
+            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                    BorderThickness="0 2 0 0" BorderBrush="#FF787878"
+                    Margin="5 0">
+                <Button Height="75" Width="150"
+                        HorizontalAlignment="Right"
+                        Margin="0 5">
+                    <TextBlock Text="Upload"
+                                FontSize="24" Foreground="White"/>
+                </Button>
+            </Border>
         </Grid>
     </ScrollViewer>
 </UserControl>
