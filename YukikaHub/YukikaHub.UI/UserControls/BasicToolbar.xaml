@@ -6,6 +6,13 @@
              xmlns:local="clr-namespace:YukikaHub.UI.UserControls" xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="PopUpItem" TargetType="MenuItem" BasedOn="{StaticResource MaterialDesignMenuItem}">
+            <Setter Property="Background" Value="#f7527e"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid>
         <StackPanel x:Name="BasicToolBar"
                     Orientation="Horizontal"
@@ -22,7 +29,8 @@
                     </MenuItem.Header>
                 </MenuItem>
                 <MenuItem HorizontalAlignment="Center" Height="50" Width="50"
-                          Click="MenuItem_Click" Name="menuItem"
+                          Name="menuItem"
+                          DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext}"
                           Padding="0">
                     <MenuItem.Header>
                         <StackPanel Margin="0,0,-25,0">
@@ -30,12 +38,18 @@
                                         Width="50" Height="50"/>
                         </StackPanel>
                     </MenuItem.Header>
-                    <MenuItem.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Developer Mode"/>
+                    <MenuItem Header="Dev Mode"
+                              Command="{Binding SwitchToDevModeCommand}"
+                              Style="{StaticResource PopUpItem}"/>
+                    <MenuItem Header="User Mode"
+                              Style="{StaticResource PopUpItem}"/>
+                    <!--<MenuItem.ContextMenu>
+                        <ContextMenu Name="contextMenu">
+                            <MenuItem Header="Developer Mode"
+                                      Click="devModeMenu_Click"/>
                             <MenuItem Header="User Mode"/>
                         </ContextMenu>
-                    </MenuItem.ContextMenu>
+                    </MenuItem.ContextMenu>-->
                 </MenuItem>
             </Menu>
             <Button Width="50" Height="50"
@@ -47,7 +61,6 @@
                 <md:PackIcon Kind="Close"
                                  Width="50" Height="{Binding ElementName=BasicToolBar, Path=Height}"/>
             </Button>
-
         </StackPanel>
     </Grid>
 </UserControl>

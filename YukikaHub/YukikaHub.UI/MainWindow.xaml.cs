@@ -25,7 +25,7 @@ namespace YukikaHub.UI
         {
             InitializeComponent();
 
-            DataContext = mainViewModel;
+            this.DataContext = mainViewModel;
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

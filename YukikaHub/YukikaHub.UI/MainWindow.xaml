@@ -7,6 +7,7 @@
         xmlns:controls="clr-namespace:YukikaHub.UI.UserControls" 
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:view="clr-namespace:YukikaHub.UI.Views"
+        xmlns:vm="clr-namespace:YukikaHub.UI.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="960" Width="1280"
         WindowStartupLocation="CenterScreen" WindowStyle="None" 
@@ -15,9 +16,12 @@
     <Window.Resources>
         <Image x:Key="lovemonth"
                Source="C:\Users\참관자\source\repos\WPF Projects\YukikaHub\YukikaHub\YukikaHub.UI\Images\Lovemonth.jpg"/>
+        <DataTemplate DataType="{x:Type vm:AddAlbumViewModel}">
+            <view:AddAlbumView/>
+        </DataTemplate>
     </Window.Resources>
 
-    <Grid>
+    <Grid Background="#FFF0F0F0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
@@ -31,11 +35,13 @@
                          Grid.ColumnSpan="2"
                          Panel.ZIndex="1"
                          MouseLeftButtonDown="Window_MouseLeftButtonDown"/>
-        <controls:BasicToolbar Grid.Column="1" Panel.ZIndex="2"/>
+        <controls:BasicToolbar Grid.Column="1" Panel.ZIndex="2"
+                               DataContext="{Binding BasicToolBarViewModel}"/>
 
         <view:NavigationView Grid.Column="0" Grid.Row="1"/>
 
-        <view:AddAlbumView Grid.Column="1" Grid.Row="1"/>
+        <ContentControl Grid.Row="1" Grid.Column="1"
+                        Content="{Binding SelectedDetailViewModel}"/>
         <!--<ListView Grid.Column="1" Grid.Row="1">
             <ListView.Resources>
                 <Style TargetType="Image">

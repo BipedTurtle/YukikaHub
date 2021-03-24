@@ -18,7 +18,13 @@ namespace YukikaHub.UI.Settings
 
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<MainViewModel>().AsSelf();
-            builder.RegisterType<EventAggregator>().As<IEventAggregator>();
+            builder.RegisterType<BasicToolbarViewModel>().AsSelf();
+            builder.RegisterType<EventAggregator>().As<IEventAggregator>().SingleInstance();
+
+            builder.RegisterType<BasicToolbarViewModel>().As<IBasicToolBarViewModel>();
+
+            builder.RegisterType<AddAlbumViewModel>()
+                   .Keyed<IDetailViewModel>(nameof(AddAlbumViewModel));
 
             return builder.Build();
         }
