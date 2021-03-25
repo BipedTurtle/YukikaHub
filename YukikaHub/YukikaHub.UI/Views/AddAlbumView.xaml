@@ -8,7 +8,8 @@
              xmlns:dp="clr-namespace:YukikaHub.UI.Dependency_Properties"
              xmlns:controls="clr-namespace:YukikaHub.UI.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="960" d:DesignWidth="1020">
+             d:DesignHeight="960" d:DesignWidth="1020"
+             Loaded="AddAlbumView_Loaded">
     <ScrollViewer>
         <Grid Background="White">
             <Grid.RowDefinitions>
@@ -27,13 +28,15 @@
                     <TextBlock Text="Image Will Show Up here"
                                FontSize="24" FontFamily="Lemon Milk"
                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Image Source="../Images/Lovemonth.jpg"
+                    <Image x:Name="AlbumImage"
+                           Source="../Images/Lovemonth.jpg"
                            Visibility="Hidden"/>
                 </Grid>
                 <Button Width="200" Height="75"
                         Margin="0 10 0 0" 
                         Background="#FFFF6464" BorderBrush="#FFFF6464"
-                        Command="{Binding BrowseImageCommand}">
+                        Command="{Binding BrowseImageCommand}"
+                        CommandParameter="{}">
                     <TextBlock Text="Browse Image"
                                FontSize="20" FontFamily="Lemon Milk Light"/>
                 </Button>
@@ -49,10 +52,11 @@
                                 Value="{StaticResource MaterialDesignTextBox}"/>
                     </Style>
                 </StackPanel.Resources>
-                <controls:LabeledTextBox dp:LabeledTextBox.Text="Title"/>
-                <controls:LabeledTextBox dp:LabeledTextBox.Text="Price"/>
-                <controls:LabeledTextBox dp:LabeledTextBox.Text="Released"/>
-                <controls:LabeledTextBox dp:LabeledTextBox.Text="Distribution"/>
+                <controls:LabeledTextBox dp:LabeledTextBox.Label="Title"
+                                         dp:LabeledTextBox.Text="{Binding DummyTitle}"/>
+                <controls:LabeledTextBox dp:LabeledTextBox.Label="Price"/>
+                <controls:LabeledTextBox dp:LabeledTextBox.Label="Released"/>
+                <controls:LabeledTextBox dp:LabeledTextBox.Label="Distribution"/>
                 <StackPanel>
                     <Label Content="Description"
                            Margin="0 15 0 0"

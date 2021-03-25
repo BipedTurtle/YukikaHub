@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using YukikaHub.UI.ViewModels;
 
 namespace YukikaHub.UI.Views
 {
@@ -20,9 +21,23 @@ namespace YukikaHub.UI.Views
     /// </summary>
     public partial class AddAlbumView : UserControl
     {
+        private AddAlbumViewModel _addAlbumViewModel;
+
         public AddAlbumView()
         {
             InitializeComponent();
+        }
+
+        private void AddAlbumView_Loaded(object sender, RoutedEventArgs e)
+        {
+            _addAlbumViewModel = (AddAlbumViewModel)this.DataContext;
+            _addAlbumViewModel.UploadAlbumImage += OnImageChosen_UploadImage;
+        }
+
+        private void OnImageChosen_UploadImage(BitmapImage img)
+        {
+            AlbumImage.Source = img;
+            AlbumImage.Visibility = Visibility.Visible;
         }
     }
 }

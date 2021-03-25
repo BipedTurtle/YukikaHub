@@ -9,20 +9,20 @@ namespace YukikaHub.UI.Dependency_Properties
 {
     public class LabeledTextBox : DependencyObject
     {
-        #region Text Property
-        public static string GetText(DependencyObject obj)
+        #region Label Property
+        public static string GetLabel(DependencyObject obj)
         {
-            return (string)obj.GetValue(TextProperty);
+            return (string)obj.GetValue(LabelProperty);
         }
 
-        public static void SetText(DependencyObject obj, string value)
+        public static void SetLabel(DependencyObject obj, string value)
         {
-            obj.SetValue(TextProperty, value);
+            obj.SetValue(LabelProperty, value);
         }
 
-        public static readonly DependencyProperty TextProperty =
+        public static readonly DependencyProperty LabelProperty =
             DependencyProperty.Register(
-                "Text",
+                "Label",
                 typeof(string),
                 typeof(LabeledTextBox),
                 new PropertyMetadata(""));
@@ -46,5 +46,23 @@ namespace YukikaHub.UI.Dependency_Properties
                 typeof(LabeledTextBox));
         #endregion
 
+        #region Text Property
+        public static string GetText(DependencyObject obj)
+        {
+            return (string)obj.GetValue(TextProperty);
+        }
+
+        public static void SetText(DependencyObject obj, string value)
+        {
+            obj.SetValue(TextProperty, value);
+        }
+
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register(
+                "Text",
+                typeof(string),
+                typeof(LabeledTextBox),
+                new PropertyMetadata(""));
+        #endregion
     }
 }

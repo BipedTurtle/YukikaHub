@@ -17,7 +17,7 @@ namespace YukikaHub.DataAccess
         {
             base.OnConfiguring(optionsBuilder);
 
-            var connectionString = "";
+            var connectionString = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = YukikaStoreAppData";
             optionsBuilder.UseSqlServer(connectionString);
         }
     }

@@ -8,7 +8,6 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="100"
-             dp:LabeledTextBox.Text="kika"
              VerticalAlignment="Bottom" VerticalContentAlignment="Center"
              FontFamily="LEMON MILK">
     <Grid Background="White">
@@ -16,13 +15,14 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=(dp:LabeledTextBox.Text)}"
+        <Label Content="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=(dp:LabeledTextBox.Label)}"
                VerticalAlignment="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=VerticalAlignment}" 
                VerticalContentAlignment="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=VerticalContentAlignment}"
-               Margin="0 0 20 -5" Padding="5 5 5 0"
+               Margin="0 0 20 2" Padding="5 5 5 0"
                Foreground="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Foreground}"/>
         <TextBox Grid.Column="1"
                  VerticalAlignment="Center"
+                 Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=(dp:LabeledTextBox.Text)}"
                  Style="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=(dp:LabeledTextBox.Style)}"/>
     </Grid>
 </UserControl>
