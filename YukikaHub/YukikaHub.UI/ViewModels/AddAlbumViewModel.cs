@@ -15,11 +15,19 @@ namespace YukikaHub.UI.ViewModels
     {
         public AddAlbumViewModel()
         {
-            this.BrowseImageCommand = new DelegateCommand(this.BrowseImage_Execute);   
+            this.BrowseImageCommand = new DelegateCommand(this.BrowseImage_Execute);
+            this.UploadAlbumCommand = new DelegateCommand(this.UploadAlbum_Execute);
         }
 
         public event Action<BitmapImage> UploadAlbumImage;
-        
+
+        #region Properties
+        public string Title { get; set; }
+        public double Price { get; set; }
+        public DateTime Released { get; set; }
+        public string Distribution { get; set; }
+        #endregion
+
         #region Commands
         public ICommand BrowseImageCommand { get; }
         public ICommand AddSongCommand { get; }
@@ -40,8 +48,13 @@ namespace YukikaHub.UI.ViewModels
             var bitmap = new BitmapImage(uri);
             this.UploadAlbumImage?.Invoke(bitmap);
         }
+
+        public void UploadAlbum_Execute()
+        {
+            var price = this.Price;
+        }
         #endregion
 
-        public string DummyTitle { get; set; } = "Soul Lady";
+
     }
 }

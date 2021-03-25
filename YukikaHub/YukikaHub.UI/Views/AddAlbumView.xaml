@@ -7,9 +7,14 @@
              xmlns:styling="clr-namespace:YukikaHub.UI.Attached_Properties"
              xmlns:dp="clr-namespace:YukikaHub.UI.Dependency_Properties"
              xmlns:controls="clr-namespace:YukikaHub.UI.UserControls"
+             xmlns:converters="clr-namespace:YukikaHub.UI.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="960" d:DesignWidth="1020"
              Loaded="AddAlbumView_Loaded">
+    <UserControl.Resources>
+        <converters:StringToDoubleConverter x:Key="StringDoubleConverter"/>
+    </UserControl.Resources>
+    
     <ScrollViewer>
         <Grid Background="White">
             <Grid.RowDefinitions>
@@ -53,17 +58,21 @@
                     </Style>
                 </StackPanel.Resources>
                 <controls:LabeledTextBox dp:LabeledTextBox.Label="Title"
-                                         dp:LabeledTextBox.Text="{Binding DummyTitle}"/>
-                <controls:LabeledTextBox dp:LabeledTextBox.Label="Price"/>
-                <controls:LabeledTextBox dp:LabeledTextBox.Label="Released"/>
-                <controls:LabeledTextBox dp:LabeledTextBox.Label="Distribution"/>
+                                         dp:LabeledTextBox.Text="{Binding Title, Mode=TwoWay}"/>
+                <controls:LabeledTextBox dp:LabeledTextBox.Label="Price"
+                                         dp:LabeledTextBox.Text="{Binding Price, Mode=TwoWay, Converter={StaticResource StringDoubleConverter}}"/>
+                <controls:LabeledTextBox dp:LabeledTextBox.Label="Released"
+                                         dp:LabeledTextBox.Text="{Binding Released, Mode=TwoWay}"/>
+                <controls:LabeledTextBox dp:LabeledTextBox.Label="Distribution"
+                                         dp:LabeledTextBox.Text="{Binding Distribution, Mode=TwoWay}"/>
                 <StackPanel>
                     <Label Content="Description"
                            Margin="0 15 0 0"
                            FontSize="32" FontWeight="Bold" FontFamily="LEMON MILK Bold"/>
                     <TextBox Name="TextBox_Description"
                              AcceptsReturn="True" TextWrapping="Wrap"
-                             Style="{StaticResource MaterialDesignOutlinedTextBox}" Height="210"/>
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}" Height="210"
+                             Text="{Binding Description, Mode=TwoWay}"/>
                 </StackPanel>
             </StackPanel>
 
@@ -102,7 +111,8 @@
                     Margin="5 0">
                 <Button Height="75" Width="150"
                         HorizontalAlignment="Right"
-                        Margin="0 5">
+                        Margin="0 5"
+                        Command="{Binding UploadAlbumCommand}">
                     <TextBlock Text="Upload"
                                 FontSize="24" Foreground="White"/>
                 </Button>
