@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\YukikaHub.Model\YukikaHub.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Images\Lovemonth.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
