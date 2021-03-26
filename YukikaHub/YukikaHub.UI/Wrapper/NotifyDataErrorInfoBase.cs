@@ -42,9 +42,10 @@ namespace YukikaHub.UI.Wrapper
 
         public void ClearErorrs(string propertyName)
         {
-            if (_errorsByPropertyName.ContainsKey(propertyName))
+            if (_errorsByPropertyName.ContainsKey(propertyName)) {
                 _errorsByPropertyName.Remove(propertyName);
-            OnErrorsChanged(propertyName);
+                OnErrorsChanged(propertyName);
+            }
         }
     }
 }

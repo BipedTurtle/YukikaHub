@@ -1,13 +1,10 @@
 ﻿using Microsoft.Win32;
 using Prism.Commands;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using YukikaHub.Model;
+using YukikaHub.UI.Wrapper;
 
 namespace YukikaHub.UI.ViewModels
 {
@@ -17,15 +14,14 @@ namespace YukikaHub.UI.ViewModels
         {
             this.BrowseImageCommand = new DelegateCommand(this.BrowseImage_Execute);
             this.UploadAlbumCommand = new DelegateCommand(this.UploadAlbum_Execute);
+
+            this.Album = new AlbumWrapper(new Album());
         }
 
         public event Action<BitmapImage> UploadAlbumImage;
 
         #region Properties
-        public string Title { get; set; }
-        public double Price { get; set; }
-        public DateTime Released { get; set; }
-        public string Distribution { get; set; }
+        public AlbumWrapper Album { get; set; }
         #endregion
 
         #region Commands
@@ -51,7 +47,6 @@ namespace YukikaHub.UI.ViewModels
 
         public void UploadAlbum_Execute()
         {
-            var price = this.Price;
         }
         #endregion
 

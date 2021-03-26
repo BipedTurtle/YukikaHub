@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace YukikaHub.UI.Dependency_Properties
 {
@@ -63,6 +64,25 @@ namespace YukikaHub.UI.Dependency_Properties
                 typeof(string),
                 typeof(LabeledTextBox),
                 new PropertyMetadata(""));
+        #endregion
+
+        #region Bakcground Property
+        public static SolidColorBrush GetBackground(DependencyObject obj)
+        {
+            return (SolidColorBrush)obj.GetValue(BackgroundProperty);
+        }
+
+        public static void SetBackground(DependencyObject obj, SolidColorBrush value)
+        {
+            obj.SetValue(BackgroundProperty, value);
+        }
+
+        public static readonly DependencyProperty BackgroundProperty =
+            DependencyProperty.Register(
+                "Background",
+                typeof(SolidColorBrush),
+                typeof(LabeledTextBox),
+                new PropertyMetadata(new SolidColorBrush()));
         #endregion
     }
 }
