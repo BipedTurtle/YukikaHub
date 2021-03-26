@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace YukikaHub.Model
         [Required]
         public byte[] Picture { get; set; }
 
-        public List<Song> Songs { get; set; }
+        public ObservableCollection<Song> Songs { get; set; } = new ObservableCollection<Song>();
 
         [Required]
         [StringLength(30)]

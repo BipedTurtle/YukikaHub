@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +24,10 @@ namespace YukikaHub.UI.Wrapper
             set { SetValue<byte[]>(value); }
         }
 
-        public List<Song> Songs
+        public ObservableCollection<Song> Songs
         {
-            get => GetValue<List<Song>>();
-            set { SetValue<List<Song>>(value); }
+            get => GetValue<ObservableCollection<Song>>();
+            set { SetValue<ObservableCollection<Song>>(value); }
         }
 
         public string Title

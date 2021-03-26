@@ -13,6 +13,27 @@
              Loaded="AddAlbumView_Loaded">
     <UserControl.Resources>
         <converters:StringToDoubleConverter x:Key="StringDoubleConverter"/>
+        <Style TargetType="controls:LabeledTextBox">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder x:Name="adorned"/>
+                            <TextBlock Text="{Binding ElementName=adorned, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" 
+                                                   Foreground="Red"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="dp:LabeledTextBox.Style"
+                                Value="{StaticResource MaterialDesignTextBox}"/>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="dp:LabeledTextBox.Background" Value="#ff4d4d"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
     
     <ScrollViewer>
@@ -49,29 +70,6 @@
             <StackPanel Name="InfoPanel"
                         Grid.Column="1"
                         styling:MarginSetter.ChildMargin="0 15" Margin="20 10 20 10">
-                <StackPanel.Resources>
-                    <Style TargetType="controls:LabeledTextBox">
-                        <Setter Property="Validation.ErrorTemplate">
-                            <Setter.Value>
-                                <ControlTemplate>
-                                    <StackPanel>
-                                        <AdornedElementPlaceholder x:Name="adorned"/>
-                                        <TextBlock Text="{Binding ElementName=adorned, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" 
-                                                   Foreground="Red"/>
-                                    </StackPanel>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Property="FontSize" Value="24"/>
-                        <Setter Property="dp:LabeledTextBox.Style"
-                                Value="{StaticResource MaterialDesignTextBox}"/>
-                        <Style.Triggers>
-                            <Trigger Property="Validation.HasError" Value="True">
-                                <Setter Property="dp:LabeledTextBox.Background" Value="#ff4d4d"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackPanel.Resources>
                 <controls:LabeledTextBox dp:LabeledTextBox.Label="Title"
                                          dp:LabeledTextBox.Text="{Binding Album.Title, Mode=TwoWay}"/>
                 <controls:LabeledTextBox dp:LabeledTextBox.Label="Price"
@@ -97,14 +95,15 @@
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
                 <DataGrid Grid.Column="0"
+                          ItemsSource="{Binding Album.Songs}" SelectedItem="{Binding SelectedSong}"
                           AutoGenerateColumns="False" Width="auto"
                           Margin="20 0">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Song" Width="*"/>
-                        <DataGridTextColumn Header="Duration" Width="*"/>
-                        <DataGridTextColumn Header="Composer" Width="*"/>
-                        <DataGridTextColumn Header="Lyricist" Width="*"/>
-                        <DataGridTextColumn Header="Ratings" Width="*"/> <!--Challenge: make ratings row appear as an image of five stars, not a number-->
+                        <DataGridTextColumn Header="Song" Width="*" Binding="{Binding Title}"/>
+                        <DataGridTextColumn Header="Duration" Width="*" Binding="{Binding Duration}"/>
+                        <DataGridTextColumn Header="Composer" Width="*" Binding="{Binding Composer}"/>
+                        <DataGridTextColumn Header="Lyricist" Width="*" Binding="{Binding Lyricist}"/>
+                        <DataGridTextColumn Header="Ratings" Width="*" Binding="{Binding Ratings}"/> <!--Challenge: make ratings row appear as an image of five stars, not a number-->
                     </DataGrid.Columns>
                 </DataGrid>
                 <StackPanel Grid.Column="1"
@@ -115,9 +114,11 @@
                         </Style>
                     </StackPanel.Resources>
                     <Button Content="Add" 
-                            Background="#FF2AD449" BorderBrush="{x:Null}"/>
+                            Background="#FF2AD449" BorderBrush="{x:Null}"
+                            Command="{Binding AddSongCommand}"/>
                     <Button Content="Remove" 
-                            Background="#FFE43D3D" BorderBrush="{x:Null}"/>
+                            Background="#FFE43D3D" BorderBrush="{x:Null}"
+                            Command="{Binding RemoveSongCommand}"/>
                 </StackPanel>
             </Grid>
 
