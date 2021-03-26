@@ -84,6 +84,7 @@ namespace YukikaHub.UI.ViewModels
             };
 
             this.Album.Songs.Add(newSong);
+            
         }
 
         public void RemoveSong_Execute()

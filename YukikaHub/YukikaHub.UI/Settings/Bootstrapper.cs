@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YukikaHub.DataAccess;
 using YukikaHub.UI.ViewModels;
 
 namespace YukikaHub.UI.Settings
@@ -18,6 +19,7 @@ namespace YukikaHub.UI.Settings
 
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<MainViewModel>().AsSelf();
+            builder.RegisterType<YukikaHubDbContext>().AsSelf();
             builder.RegisterType<BasicToolbarViewModel>().AsSelf();
             builder.RegisterType<EventAggregator>().As<IEventAggregator>().SingleInstance();
 

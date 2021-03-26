@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\YukikaHub.DataAccess\YukikaHub.DataAccess.csproj" />
     <ProjectReference Include="..\YukikaHub.Model\YukikaHub.Model.csproj" />
   </ItemGroup>
 

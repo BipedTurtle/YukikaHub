@@ -8,7 +8,7 @@ using YukikaHub.Model;
 
 namespace YukikaHub.DataAccess
 {
-    public class CustomDbContext : DbContext
+    public class YukikaHubDbContext : DbContext
     {
         public DbSet<Album> Albums { get; set; }
         public DbSet<Song> Songs { get; set; }

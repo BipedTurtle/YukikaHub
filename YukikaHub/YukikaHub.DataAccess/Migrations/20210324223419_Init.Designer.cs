@@ -9,7 +9,7 @@ using YukikaHub.DataAccess;
 
 namespace YukikaHub.DataAccess.Migrations
 {
-    [DbContext(typeof(CustomDbContext))]
+    [DbContext(typeof(YukikaHubDbContext))]
     [Migration("20210324223419_Init")]
     partial class Init
     {

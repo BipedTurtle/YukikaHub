@@ -8,7 +8,7 @@ using YukikaHub.DataAccess;
 
 namespace YukikaHub.DataAccess.Migrations
 {
-    [DbContext(typeof(CustomDbContext))]
+    [DbContext(typeof(YukikaHubDbContext))]
     partial class CustomDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
