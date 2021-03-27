@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using Prism.Commands;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using YukikaHub.Model;
@@ -17,13 +18,19 @@ namespace YukikaHub.UI.ViewModels
         public AddAlbumViewModel(ISongRepository songRepository)
         {
             this.BrowseImageCommand = new DelegateCommand(this.BrowseImage_Execute);
-            this.UploadAlbumCommand = new DelegateCommand(this.UploadAlbum_Execute);
+            this.UploadAlbumCommand = new DelegateCommand(this.UploadAlbum_Execute, this.UploadAlbum_CanExecute);
             this.AddSongCommand = new DelegateCommand(this.AddSong_Execute);
             this.RemoveSongCommand = new DelegateCommand(this.RemoveSong_Execute, this.RemoveSong_CanExecute);
 
             _songRepository = songRepository;
 
             this.Album = new AlbumWrapper(new Album());
+            // this is what notifies the upload button to toggle on whenever a property of album changes
+            this.Album.PropertyChanged += (s, e) => {
+                if (e.PropertyName == nameof(Album.HasErrors))
+                    ((DelegateCommand)UploadAlbumCommand).RaiseCanExecuteChanged();
+            };
+
             #region a trick to trigger validation
             this.Album.Title = "";
             this.Album.Price = 0;
@@ -77,7 +84,14 @@ namespace YukikaHub.UI.ViewModels
 
         public void UploadAlbum_Execute()
         {
+            
+        }
 
+        public bool UploadAlbum_CanExecute()
+        {
+            return
+                this.HasSong &&
+                !this.Album.HasErrors;
         }
 
         public void AddSong_Execute()
@@ -94,12 +108,14 @@ namespace YukikaHub.UI.ViewModels
 
             this.Album.Songs.Add(newSong);
             base.OnPropertyChanged(nameof(HasSong));
+            ((DelegateCommand)UploadAlbumCommand).RaiseCanExecuteChanged();
         }
 
         public void RemoveSong_Execute()
         {
             this.Album.Songs.Remove(this.SelectedSong);
             base.OnPropertyChanged(nameof(HasSong));
+            ((DelegateCommand)UploadAlbumCommand).RaiseCanExecuteChanged();
         }
 
         public bool RemoveSong_CanExecute()

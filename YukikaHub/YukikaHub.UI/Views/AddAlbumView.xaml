@@ -119,7 +119,8 @@
                                     </Binding.ValidationRules>
                                 </Binding>
                             </DataGridTextColumn.Binding>
-                        </DataGridTextColumn> <!--Challenge: make ratings row appear as an image of five stars, not a number-->
+                            
+                        </DataGridTextColumn>
                     </DataGrid.Columns>
                 </DataGrid>
                 <StackPanel Grid.Column="1"
