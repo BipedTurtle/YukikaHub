@@ -8,7 +8,7 @@ using YukikaHub.Model;
 
 namespace YukikaHub.UI.Data
 {
-    public class SongRepository : GenericRepository<Song, YukikaHubDbContext>
+    public class SongRepository : GenericRepository<Song, YukikaHubDbContext>, ISongRepository
     {
         public SongRepository(YukikaHubDbContext context)
             : base(context)

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YukikaHub.DataAccess;
+using YukikaHub.UI.Data;
 using YukikaHub.UI.ViewModels;
 
 namespace YukikaHub.UI.Settings
@@ -22,6 +23,8 @@ namespace YukikaHub.UI.Settings
             builder.RegisterType<YukikaHubDbContext>().AsSelf();
             builder.RegisterType<BasicToolbarViewModel>().AsSelf();
             builder.RegisterType<EventAggregator>().As<IEventAggregator>().SingleInstance();
+
+            builder.RegisterType<SongRepository>().As<ISongRepository>();
 
             builder.RegisterType<BasicToolbarViewModel>().As<IBasicToolBarViewModel>();
 

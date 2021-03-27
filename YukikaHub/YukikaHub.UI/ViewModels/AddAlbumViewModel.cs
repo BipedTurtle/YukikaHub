@@ -4,6 +4,7 @@ using System;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using YukikaHub.Model;
+using YukikaHub.UI.Data;
 using YukikaHub.UI.Wrapper;
 
 namespace YukikaHub.UI.ViewModels
@@ -11,15 +12,22 @@ namespace YukikaHub.UI.ViewModels
     public class AddAlbumViewModel : ViewModelBase, IDetailViewModel
     {
         private Song _selectedSong;
+        private ISongRepository _songRepository;
 
-        public AddAlbumViewModel()
+        public AddAlbumViewModel(ISongRepository songRepository)
         {
             this.BrowseImageCommand = new DelegateCommand(this.BrowseImage_Execute);
             this.UploadAlbumCommand = new DelegateCommand(this.UploadAlbum_Execute);
             this.AddSongCommand = new DelegateCommand(this.AddSong_Execute);
             this.RemoveSongCommand = new DelegateCommand(this.RemoveSong_Execute, this.RemoveSong_CanExecute);
 
+            _songRepository = songRepository;
+
             this.Album = new AlbumWrapper(new Album());
+            #region a trick to trigger validation
+            this.Album.Title = "";
+            this.Album.Price = 0;
+            #endregion
             this.Album.Songs.Add(new Song {
                 Id = 1,
                 Title = "Soul Lady",

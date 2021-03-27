@@ -97,7 +97,16 @@
                 <DataGrid Grid.Column="0"
                           ItemsSource="{Binding Album.Songs}" SelectedItem="{Binding SelectedSong}"
                           AutoGenerateColumns="False" Width="auto"
+                          FontFamily="Lemon Milk"
                           Margin="20 0">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                        </Style>
+                    </DataGrid.Resources>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Song" Width="*" Binding="{Binding Title}"/>
                         <DataGridTextColumn Header="Duration" Width="*" Binding="{Binding Duration}"/>
