@@ -51,6 +51,7 @@ namespace YukikaHub.UI.ViewModels
                 ((DelegateCommand)this.RemoveSongCommand).RaiseCanExecuteChanged();
             }
         }
+        public bool HasSong { get => this.Album.Songs.Count > 0; }
         #endregion
 
         #region Commands
@@ -92,12 +93,13 @@ namespace YukikaHub.UI.ViewModels
             };
 
             this.Album.Songs.Add(newSong);
-            
+            base.OnPropertyChanged(nameof(HasSong));
         }
 
         public void RemoveSong_Execute()
         {
             this.Album.Songs.Remove(this.SelectedSong);
+            base.OnPropertyChanged(nameof(HasSong));
         }
 
         public bool RemoveSong_CanExecute()
