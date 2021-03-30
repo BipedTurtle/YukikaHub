@@ -19,6 +19,9 @@
         <DataTemplate DataType="{x:Type vm:AddAlbumViewModel}">
             <view:AddAlbumView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AlbumsViewModel}">
+            <view:AlbumView/>
+        </DataTemplate>
     </Window.Resources>
     <md:DialogHost Identifier="MainDialogHost">
         <Grid Background="#FFF0F0F0">
@@ -38,22 +41,11 @@
             <controls:BasicToolbar Grid.Column="1" Panel.ZIndex="2"
                                    DataContext="{Binding BasicToolBarViewModel}"/>
 
-            <view:NavigationView Grid.Column="0" Grid.Row="1"/>
+            <view:NavigationView Grid.Column="0" Grid.Row="1"
+                                 DataContext="{Binding NavigationViewModel}"/>
 
             <ContentControl Grid.Row="1" Grid.Column="1"
                             Content="{Binding SelectedDetailViewModel}"/>
-            <!--<ListView Grid.Column="1" Grid.Row="1">
-                <ListView.Resources>
-                    <Style TargetType="Image">
-                        <Setter Property="Width" Value="200"/>
-                    </Style>
-                </ListView.Resources>
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="3"/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-            </ListView>-->
         </Grid>
     </md:DialogHost>
 </Window>

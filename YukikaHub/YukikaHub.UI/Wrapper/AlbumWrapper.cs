@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using YukikaHub.Model;
 
 namespace YukikaHub.UI.Wrapper
@@ -22,6 +24,21 @@ namespace YukikaHub.UI.Wrapper
         {
             get => GetValue<byte[]>();
             set { SetValue<byte[]>(value); }
+        }
+
+        public BitmapImage Image
+        {
+            get
+            {
+                using var stream = new MemoryStream(this.Picture);
+
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
+
+                return bitmapImage;
+            }
         }
 
         public ObservableCollection<Song> Songs

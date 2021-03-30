@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YukikaHub.DataAccess", "Yuk
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YukikaHub.Model", "YukikaHub.Model\YukikaHub.Model.csproj", "{40D0D3BA-42C9-401C-90BE-0AB4EFE28ED3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{FB57DB51-3C00-4E0A-A381-0D6DF7C91713}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YukikaHub.Tests", "YukikaHub.Tests\YukikaHub.Tests.csproj", "{68D27C38-76AC-4FB5-A589-54F88AA6F3BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{40D0D3BA-42C9-401C-90BE-0AB4EFE28ED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40D0D3BA-42C9-401C-90BE-0AB4EFE28ED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40D0D3BA-42C9-401C-90BE-0AB4EFE28ED3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB57DB51-3C00-4E0A-A381-0D6DF7C91713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB57DB51-3C00-4E0A-A381-0D6DF7C91713}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB57DB51-3C00-4E0A-A381-0D6DF7C91713}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB57DB51-3C00-4E0A-A381-0D6DF7C91713}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68D27C38-76AC-4FB5-A589-54F88AA6F3BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68D27C38-76AC-4FB5-A589-54F88AA6F3BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68D27C38-76AC-4FB5-A589-54F88AA6F3BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68D27C38-76AC-4FB5-A589-54F88AA6F3BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

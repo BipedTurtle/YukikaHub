@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:YukikaHub.UI.Views"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:vm="clr-namespace:YukikaHub.UI.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -34,19 +35,20 @@
         </md:TransitioningContent>
         <ListView MinWidth="250" Name="lv"
                   Margin="10 50 0 0"
+                  SelectedItem="{Binding SelectedNavigationItem, Mode=OneWayToSource}"
                   SelectionChanged="OnNavigation_SelectionChanged">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
                     <Setter Property="Height" Value="50"/>
                 </Style>
             </ListView.ItemContainerStyle>
-            <ListViewItem>
+            <ListViewItem Tag="{x:Type vm:AlbumsViewModel}">
                 <StackPanel Orientation="Horizontal">
                     <md:PackIcon Kind="Album"/>
                     <TextBlock Text="ALBUMS"/>
                 </StackPanel>
             </ListViewItem>
-            <ListViewItem>
+            <ListViewItem Tag="{x:Type vm:TicketsViewModel}">
                 <StackPanel Orientation="Horizontal">
                     <md:PackIcon Kind="Ticket"/>
                     <TextBlock Text="TICKETS"/>

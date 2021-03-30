@@ -18,11 +18,13 @@ namespace YukikaHub.UI.ViewModels
 
         public MainViewModel(IEventAggregator eventAggregator,
             IIndex<string, IDetailViewModel> detailVmCreator,
-            IBasicToolBarViewModel basicToolBarViewModel)
+            IBasicToolBarViewModel basicToolBarViewModel,
+            INavigationViewModel navigationViewModel)
         {
             _eventAggregator = eventAggregator;
             _detailVmCreator = detailVmCreator;
             this.BasicToolBarViewModel = basicToolBarViewModel;
+            this.NavigationViewModel = navigationViewModel;
 
             _eventAggregator
                 .GetEvent<SelectedDetailViewChangedEvent>()
@@ -41,6 +43,7 @@ namespace YukikaHub.UI.ViewModels
         }
 
         public IBasicToolBarViewModel BasicToolBarViewModel { get; private set; }
+        public INavigationViewModel NavigationViewModel { get; set; }
         #endregion
 
 
