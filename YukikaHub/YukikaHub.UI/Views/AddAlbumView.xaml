@@ -97,7 +97,7 @@
                     <ColumnDefinition Width="150"/> 
                 </Grid.ColumnDefinitions>
                 <DataGrid Grid.Column="0"
-                          ItemsSource="{Binding Album.Songs}" SelectedItem="{Binding SelectedSong}"
+                          ItemsSource="{Binding Songs}" SelectedItem="{Binding SelectedSong}"
                           AutoGenerateColumns="False" Width="auto"
                           FontFamily="Lemon Milk"
                           Margin="20 0">

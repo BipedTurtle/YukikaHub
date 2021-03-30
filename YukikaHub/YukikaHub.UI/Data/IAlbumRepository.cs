@@ -7,8 +7,9 @@ using YukikaHub.Model;
 
 namespace YukikaHub.UI.Data
 {
-    public interface ISongRepository : IGenericRepository<Song>
+    public interface IAlbumRepository : IGenericRepository<Album>
     {
-        Task UpdateAndAddSongs(IEnumerable<Song> songs, int albumId);
+
+        public Task<(bool, int)> TryAddAsync(Album album);
     }
 }

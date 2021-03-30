@@ -1,12 +1,18 @@
 ﻿using Microsoft.Win32;
 using Prism.Commands;
 using System;
+using System.Linq;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using YukikaHub.Model;
 using YukikaHub.UI.Data;
 using YukikaHub.UI.Wrapper;
+using YukikaHub.UI.Extensions;
+using System.Collections.Generic;
+using System.IO;
+using MaterialDesignThemes.Wpf;
+using YukikaHub.UI.UserControls.Dialogs;
 
 namespace YukikaHub.UI.ViewModels
 {
@@ -14,8 +20,10 @@ namespace YukikaHub.UI.ViewModels
     {
         private Song _selectedSong;
         private ISongRepository _songRepository;
+        private IAlbumRepository _albumRepository;
 
-        public AddAlbumViewModel(ISongRepository songRepository)
+        public AddAlbumViewModel(ISongRepository songRepository,
+            IAlbumRepository albumRepository)
         {
             this.BrowseImageCommand = new DelegateCommand(this.BrowseImage_Execute);
             this.UploadAlbumCommand = new DelegateCommand(this.UploadAlbum_Execute, this.UploadAlbum_CanExecute);
@@ -23,6 +31,7 @@ namespace YukikaHub.UI.ViewModels
             this.RemoveSongCommand = new DelegateCommand(this.RemoveSong_Execute, this.RemoveSong_CanExecute);
 
             _songRepository = songRepository;
+            _albumRepository = albumRepository;
 
             this.Album = new AlbumWrapper(new Album());
             // this is what notifies the upload button to toggle on whenever a property of album changes
@@ -35,8 +44,7 @@ namespace YukikaHub.UI.ViewModels
             this.Album.Title = "";
             this.Album.Price = 0;
             #endregion
-            this.Album.Songs.Add(new Song {
-                Id = 1,
+            this.Songs.Add(new Song {
                 Title = "Soul Lady",
                 Duration = new TimeSpan(0, 3, 24),
                 Composer = "Jinbae Park",
@@ -58,7 +66,12 @@ namespace YukikaHub.UI.ViewModels
                 ((DelegateCommand)this.RemoveSongCommand).RaiseCanExecuteChanged();
             }
         }
-        public bool HasSong { get => this.Album.Songs.Count > 0; }
+        public ObservableCollection<Song> Songs { get; set; } = new ObservableCollection<Song>();
+        public bool HasSong { get => this.Songs.Count > 0; }
+        public bool SongsAreDistinct
+        {
+            get => !this.Songs.Select(s => s.Title).HasDuplicate();
+        }
         #endregion
 
         #region Commands
@@ -78,13 +91,34 @@ namespace YukikaHub.UI.ViewModels
                 return;
 
             var uri = new Uri(fileDialog.FileName);
-            var bitmap = new BitmapImage(uri);
-            this.UploadAlbumImage?.Invoke(bitmap);
+            var bitmapImage = new BitmapImage();
+            using (var imageStream = new FileStream(fileDialog.FileName, FileMode.Open, FileAccess.Read)) {
+                bitmapImage.BeginInit();
+                bitmapImage.UriSource = uri;
+                bitmapImage.StreamSource = imageStream;
+                bitmapImage.EndInit();
+                this.UploadAlbumImage?.Invoke(bitmapImage);
+
+                using (var reader = new BinaryReader(imageStream)) {
+                    this.Album.Picture = reader.ReadBytes((int)imageStream.Length);
+                }
+            }
         }
 
-        public void UploadAlbum_Execute()
+        public async void UploadAlbum_Execute()
         {
-            
+            if (!this.SongsAreDistinct)
+                return;
+
+            (bool albumHasBeenAdded, int albumId) result = await _albumRepository.TryAddAsync(this.Album.Model);
+            if (result.albumHasBeenAdded) {
+                await _songRepository.UpdateAndAddSongs(this.Songs, result.albumId);
+
+                // create new album instance
+                this.Album = new AlbumWrapper(new Album());
+                this.Songs.Clear();
+                OnPropertyChanged(nameof(Album));
+            }
         }
 
         public bool UploadAlbum_CanExecute()
@@ -98,7 +132,6 @@ namespace YukikaHub.UI.ViewModels
         {
             var newSong = new Song()
             {
-                Id = 0,
                 Duration = new TimeSpan(0, 0, 0),
                 Composer = "Composer Name",
                 Lyricist = "Lyricst Name",
@@ -106,14 +139,14 @@ namespace YukikaHub.UI.ViewModels
                 Title = "Title of the song"
             };
 
-            this.Album.Songs.Add(newSong);
+            this.Songs.Add(newSong);
             base.OnPropertyChanged(nameof(HasSong));
             ((DelegateCommand)UploadAlbumCommand).RaiseCanExecuteChanged();
         }
 
         public void RemoveSong_Execute()
         {
-            this.Album.Songs.Remove(this.SelectedSong);
+            this.Songs.Remove(this.SelectedSong);
             base.OnPropertyChanged(nameof(HasSong));
             ((DelegateCommand)UploadAlbumCommand).RaiseCanExecuteChanged();
         }
@@ -123,7 +156,5 @@ namespace YukikaHub.UI.ViewModels
             return this.SelectedSong != null;
         }
         #endregion
-
-
     }
 }

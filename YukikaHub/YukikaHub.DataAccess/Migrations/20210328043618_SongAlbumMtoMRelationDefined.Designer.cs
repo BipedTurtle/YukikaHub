@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YukikaHub.DataAccess;
 
 namespace YukikaHub.DataAccess.Migrations
 {
     [DbContext(typeof(YukikaHubDbContext))]
-    partial class CustomDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210328043618_SongAlbumMtoMRelationDefined")]
+    partial class SongAlbumMtoMRelationDefined
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -11,22 +11,28 @@ namespace YukikaHub.UI.Data
         where TEntity : class
         where TContext : DbContext
     {
-        private TContext _context;
+        protected TContext _context;
         public GenericRepository(TContext context)
         {
             _context = context;
         }
 
-        public void Add(TEntity model)
+        public virtual void Add(TEntity model)
         {
             _context.Set<TEntity>().Add(model);
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-
             return await
                 _context.Set<TEntity>()
+                        .ToListAsync();
+        }
+        public async Task<IEnumerable<TEntity>> GetAllNoTrackingAsync()
+        {
+            return await
+                _context.Set<TEntity>()
+                        .AsNoTracking()
                         .ToListAsync();
         }
 

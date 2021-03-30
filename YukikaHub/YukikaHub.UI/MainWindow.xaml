@@ -20,39 +20,40 @@
             <view:AddAlbumView/>
         </DataTemplate>
     </Window.Resources>
+    <md:DialogHost Identifier="MainDialogHost">
+        <Grid Background="#FFF0F0F0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-    <Grid Background="#FFF0F0F0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+            <controls:TopBar x:Name="TopBar"
+                             Grid.ColumnSpan="2"
+                             Panel.ZIndex="1"
+                             MouseLeftButtonDown="Window_MouseLeftButtonDown"/>
+            <controls:BasicToolbar Grid.Column="1" Panel.ZIndex="2"
+                                   DataContext="{Binding BasicToolBarViewModel}"/>
 
-        <controls:TopBar x:Name="TopBar"
-                         Grid.ColumnSpan="2"
-                         Panel.ZIndex="1"
-                         MouseLeftButtonDown="Window_MouseLeftButtonDown"/>
-        <controls:BasicToolbar Grid.Column="1" Panel.ZIndex="2"
-                               DataContext="{Binding BasicToolBarViewModel}"/>
+            <view:NavigationView Grid.Column="0" Grid.Row="1"/>
 
-        <view:NavigationView Grid.Column="0" Grid.Row="1"/>
-
-        <ContentControl Grid.Row="1" Grid.Column="1"
-                        Content="{Binding SelectedDetailViewModel}"/>
-        <!--<ListView Grid.Column="1" Grid.Row="1">
-            <ListView.Resources>
-                <Style TargetType="Image">
-                    <Setter Property="Width" Value="200"/>
-                </Style>
-            </ListView.Resources>
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="3"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>-->
-    </Grid>
+            <ContentControl Grid.Row="1" Grid.Column="1"
+                            Content="{Binding SelectedDetailViewModel}"/>
+            <!--<ListView Grid.Column="1" Grid.Row="1">
+                <ListView.Resources>
+                    <Style TargetType="Image">
+                        <Setter Property="Width" Value="200"/>
+                    </Style>
+                </ListView.Resources>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>-->
+        </Grid>
+    </md:DialogHost>
 </Window>

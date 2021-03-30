@@ -3,36 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YukikaHub.DataAccess;
 
 namespace YukikaHub.DataAccess.Migrations
 {
     [DbContext(typeof(YukikaHubDbContext))]
-    partial class CustomDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210327210936_SongPrimaryKeyChanged")]
+    partial class SongPrimaryKeyChanged
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("AlbumSong", b =>
-                {
-                    b.Property<int>("AlbumsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SongsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AlbumsId", "SongsId");
-
-                    b.HasIndex("SongsId");
-
-                    b.ToTable("AlbumSong");
-                });
 
             modelBuilder.Entity("YukikaHub.Model.Album", b =>
                 {
@@ -67,10 +54,12 @@ namespace YukikaHub.DataAccess.Migrations
 
             modelBuilder.Entity("YukikaHub.Model.Song", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Title")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("AlbumId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Composer")
                         .HasColumnType("nvarchar(max)");
@@ -84,27 +73,26 @@ namespace YukikaHub.DataAccess.Migrations
                     b.Property<int>("Ratings")
                         .HasColumnType("int");
 
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("Title");
 
-                    b.HasKey("Id");
+                    b.HasIndex("AlbumId");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
 
                     b.ToTable("Songs");
                 });
 
-            modelBuilder.Entity("AlbumSong", b =>
+            modelBuilder.Entity("YukikaHub.Model.Song", b =>
                 {
                     b.HasOne("YukikaHub.Model.Album", null)
-                        .WithMany()
-                        .HasForeignKey("AlbumsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Songs")
+                        .HasForeignKey("AlbumId");
+                });
 
-                    b.HasOne("YukikaHub.Model.Song", null)
-                        .WithMany()
-                        .HasForeignKey("SongsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("YukikaHub.Model.Album", b =>
+                {
+                    b.Navigation("Songs");
                 });
 #pragma warning restore 612, 618
         }

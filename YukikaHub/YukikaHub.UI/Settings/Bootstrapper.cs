@@ -24,6 +24,7 @@ namespace YukikaHub.UI.Settings
             builder.RegisterType<BasicToolbarViewModel>().AsSelf();
             builder.RegisterType<EventAggregator>().As<IEventAggregator>().SingleInstance();
 
+            builder.RegisterType<AlbumRepository>().As<IAlbumRepository>();
             builder.RegisterType<SongRepository>().As<ISongRepository>();
 
             builder.RegisterType<BasicToolbarViewModel>().As<IBasicToolBarViewModel>();
