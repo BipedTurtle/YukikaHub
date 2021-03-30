@@ -52,13 +52,15 @@
 
             <StackPanel Margin="20 40">
                 <Grid>
-                    <Rectangle Fill="#FFB7E0FD"/>
+                    <Rectangle Name="Rectangle_BlankSlate"
+                               Fill="#FFB7E0FD"/>
                     <TextBlock Text="Image Will Show Up here"
                                FontSize="24" FontFamily="Lemon Milk"
                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <Image x:Name="AlbumImage"
                            Source="../Images/Lovemonth.jpg"
-                           Visibility="Hidden"/>
+                           Visibility="Hidden"
+                           Stretch="UniformToFill"/>
                 </Grid>
                 <Button Width="200" Height="75"
                         Margin="0 10 0 0" 
@@ -165,6 +167,9 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
+
+            <md:Snackbar Grid.Row="2" Grid.ColumnSpan="2"
+                         Name="Snackbar"/>
         </Grid>
     </ScrollViewer>
 </UserControl>

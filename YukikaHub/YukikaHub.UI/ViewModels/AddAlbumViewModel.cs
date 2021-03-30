@@ -53,7 +53,10 @@ namespace YukikaHub.UI.ViewModels
             });
         }
 
+        #region Events
         public event Action<BitmapImage> UploadAlbumImage;
+        public event Action<string> AlbumUploaded;
+        #endregion
 
         #region Properties
         public AlbumWrapper Album { get; set; }
@@ -113,8 +116,14 @@ namespace YukikaHub.UI.ViewModels
             (bool albumHasBeenAdded, int albumId) result = await _albumRepository.TryAddAsync(this.Album.Model);
             if (result.albumHasBeenAdded) {
                 await _songRepository.UpdateAndAddSongs(this.Songs, result.albumId);
+                UpdateUI();
+            }
 
-                // create new album instance
+
+            void UpdateUI()
+            {
+                this.AlbumUploaded?.Invoke(this.Album.Title);
+
                 this.Album = new AlbumWrapper(new Album());
                 this.Songs.Clear();
                 OnPropertyChanged(nameof(Album));
