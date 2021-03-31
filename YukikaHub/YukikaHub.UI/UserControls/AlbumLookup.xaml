@@ -5,8 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:YukikaHub.UI.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <!--Data context will be AlbumViewModel-->
+             d:DesignHeight="450" d:DesignWidth="500">
+    <!--Data context will be Album-->
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image Source="/Images/Lovemonth.jpg"
+               Stretch="Uniform"
+               HorizontalAlignment="Center"/>
+        <Viewbox Grid.Row="1">
+            <TextBlock Text="Lovemonth"
+                       FontFamily="Lemon Milk"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Viewbox>
     </Grid>
 </UserControl>

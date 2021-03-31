@@ -36,7 +36,7 @@
         <ListView MinWidth="250" Name="lv"
                   Margin="10 50 0 0"
                   SelectedItem="{Binding SelectedNavigationItem, Mode=OneWayToSource}"
-                  SelectionChanged="OnNavigation_SelectionChanged">
+                  SelectionChanged="OnNavigation_SelectionChanged"> 
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
                     <Setter Property="Height" Value="50"/>

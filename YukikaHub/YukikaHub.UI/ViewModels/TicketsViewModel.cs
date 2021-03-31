@@ -8,5 +8,9 @@ namespace YukikaHub.UI.ViewModels
 {
     public class TicketsViewModel : ViewModelBase, IDetailViewModel
     {
+        public Task LoadAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

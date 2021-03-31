@@ -22,7 +22,6 @@ namespace YukikaHub.UI.Views
     {
         private double _selectorOffset;
         private double _lvItemHeight;
-        private event Action<string> NavigationSelectionChanged;
         public NavigationView()
         {
             InitializeComponent();
@@ -40,18 +39,10 @@ namespace YukikaHub.UI.Views
 
         private void OnNavigation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //load proper viewmodel
-
-
             //move selector UI
             selector_transition.OnApplyTemplate();
             var newMarginTop = _selectorOffset + lv.SelectedIndex * _lvItemHeight;
             selector.Margin = new Thickness(0, newMarginTop, 0, 0);
-        }
-
-        private void Test()
-        {
-
         }
     }
 }

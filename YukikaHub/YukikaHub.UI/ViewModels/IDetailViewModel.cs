@@ -1,6 +1,9 @@
-﻿namespace YukikaHub.UI.ViewModels
+﻿using System.Threading.Tasks;
+
+namespace YukikaHub.UI.ViewModels
 {
     public interface IDetailViewModel
     {
+        Task LoadAsync();
     }
 }

@@ -4,19 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:YukikaHub.UI.Views"
+             xmlns:controls="clr-namespace:YukikaHub.UI.UserControls"
+             xmlns:styling="clr-namespace:YukikaHub.UI.Attached_Properties"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White">
-        <UniformGrid Rows="3" Columns="3">
-            <UniformGrid.Resources>
-                <Style TargetType="Rectangle">
-                    <Setter Property="Margin" Value="10"/>
-                </Style>
-            </UniformGrid.Resources>
-            <Rectangle Fill="Red"/>
-            <Rectangle Fill="Red"/>
-            <Rectangle Fill="Red"/>
-            <Rectangle Fill="Red"/>
-        </UniformGrid>
+             d:DesignHeight="800" d:DesignWidth="800"
+             Loaded="UserControl_Loaded">
+    <Grid Margin="20">
+        <ListView VerticalAlignment="Top"
+                  Name="ListView"
+                  Tag="3">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid x:Name="UniformGrid"
+                                 Columns="{Binding ElementName=ListView, Path=Tag}"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <controls:AlbumLookup Width="300"/>
+            <controls:AlbumLookup Width="300"/>
+            <controls:AlbumLookup Width="300"/>
+            <controls:AlbumLookup Width="300"/>
+        </ListView>
     </Grid>
 </UserControl>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using YukikaHub.UI.UserControls;
 
 namespace YukikaHub.UI.Views
 {
@@ -23,6 +24,21 @@ namespace YukikaHub.UI.Views
         public AlbumView()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            var root = (UserControl)sender;
+            
+            var width = root.ActualWidth;
+            double marginTotal = 100;
+            int columnsCount = int.Parse((string)ListView.Tag);
+            double childSize = (width - marginTotal) / columnsCount;
+
+            foreach (var item in ListView.Items) {
+                var lookup = (AlbumLookup)item;
+                (lookup.Width, lookup.Height) = (childSize, childSize);
+            }
         }
     }
 }

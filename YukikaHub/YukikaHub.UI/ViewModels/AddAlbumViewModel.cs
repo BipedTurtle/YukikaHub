@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.IO;
 using MaterialDesignThemes.Wpf;
 using YukikaHub.UI.UserControls.Dialogs;
+using System.Threading.Tasks;
 
 namespace YukikaHub.UI.ViewModels
 {
@@ -163,6 +164,11 @@ namespace YukikaHub.UI.ViewModels
         public bool RemoveSong_CanExecute()
         {
             return this.SelectedSong != null;
+        }
+
+        public Task LoadAsync()
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }
