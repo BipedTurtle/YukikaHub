@@ -19,9 +19,9 @@ namespace YukikaHub.UI.Views
     /// <summary>
     /// Interaction logic for AlbumView.xaml
     /// </summary>
-    public partial class AlbumView : UserControl
+    public partial class AlbumsView : UserControl
     {
-        public AlbumView()
+        public AlbumsView()
         {
             InitializeComponent();
         }
@@ -29,15 +29,19 @@ namespace YukikaHub.UI.Views
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             var root = (UserControl)sender;
-            
+
             var width = root.ActualWidth;
             double marginTotal = 100;
-            int columnsCount = int.Parse((string)ListView.Tag);
+            int columnsCount = int.Parse((string)ItemsControl.Tag);
+            double marginValue = 100 / (columnsCount + 1);
+            double verticalMarginValue = 20;
+            var margin = new Thickness(marginValue, verticalMarginValue, marginValue, verticalMarginValue);
             double childSize = (width - marginTotal) / columnsCount;
 
-            foreach (var item in ListView.Items) {
+            foreach (var item in ItemsControl.Items) {
                 var lookup = (AlbumLookup)item;
                 (lookup.Width, lookup.Height) = (childSize, childSize);
+                lookup.Margin = margin;
             }
         }
     }

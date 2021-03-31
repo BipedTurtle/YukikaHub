@@ -20,7 +20,7 @@
             <view:AddAlbumView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:AlbumsViewModel}">
-            <view:AlbumView/>
+            <view:AlbumsView/>
         </DataTemplate>
     </Window.Resources>
     <md:DialogHost Identifier="MainDialogHost">

@@ -7,18 +7,39 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="500">
     <!--Data context will be Album-->
+    <UserControl.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="0" Width="100">
+                            <ContentPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="7*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Image Source="/Images/Lovemonth.jpg"
-               Stretch="Uniform"
-               HorizontalAlignment="Center"/>
+        <Viewbox Stretch="UniformToFill"
+                 Name="ImageViewBox">
+            <Button Height="{Binding ElementName=ImageViewBox, Path=Height}">
+                <Image Source="/Images/Lovemonth.jpg"
+                       Stretch="UniformToFill"
+                       HorizontalAlignment="Stretch"/>
+            </Button>
+        </Viewbox>
         <Viewbox Grid.Row="1">
             <TextBlock Text="Lovemonth"
-                       FontFamily="Lemon Milk"
-                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        FontFamily="Lemon Milk"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Viewbox>
     </Grid>
 </UserControl>
