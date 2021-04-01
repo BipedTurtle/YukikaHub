@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using YukikaHub.UI.Events;
+using YukikaHub.UI.Settings;
 
 namespace YukikaHub.UI.ViewModels
 {
@@ -21,6 +22,9 @@ namespace YukikaHub.UI.ViewModels
             this.SwitchToDevModeCommand = new DelegateCommand(this.SwitchToDevMode_Execute);
         }
 
+        #region Event Handlers
+        #endregion
+
         #region Commands
         public ICommand SwitchToDevModeCommand { get; set; }
         #endregion
@@ -28,9 +32,7 @@ namespace YukikaHub.UI.ViewModels
         #region Command Handlers
         public void SwitchToDevMode_Execute()
         {
-            _eventAggregator
-                .GetEvent<SelectedDetailViewChangedEvent>()
-                .Publish(new DetailViewChangedEventArgs(nameof(AddAlbumViewModel)));
+            ApplicationSettings.RaiseModeChanged(ApplicationMode.Developer);
         }
         #endregion
     }

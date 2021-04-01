@@ -8,6 +8,7 @@
              xmlns:controls="clr-namespace:YukikaHub.UI.UserControls"
              xmlns:styling="clr-namespace:YukikaHub.UI.Attached_Properties"
              mc:Ignorable="d" 
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="450" d:DesignWidth="600">
     <UserControl.Resources>
         <Style TargetType="controls:LabeledTextBox">
@@ -27,6 +28,15 @@
                 <controls:TicketControl/>
             </ItemsControl>
         </ScrollViewer>
-
+        <Button x:Name="Button_AddTicket"
+                Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                Margin="10"
+                Background="#FFFF83B0"
+                Visibility="{Binding AddButtonVisibility}">
+            <md:PackIcon Kind="Plus"
+                         Width="30" Height="30"
+                         Foreground="White"/>
+        </Button>
     </Grid>
 </UserControl>
