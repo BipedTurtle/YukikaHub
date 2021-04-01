@@ -18,6 +18,7 @@ namespace YukikaHub.UI.ViewModels
         public TicketsViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
+            // TODO: this is a dangling event. Make sure you unsubscribe it
             ApplicationSettings.ModeChanged += this.OnModeChanged;
         }
 

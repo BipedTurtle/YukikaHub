@@ -30,11 +30,11 @@
         <Grid Background="#FFF0F0F0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1020"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="910"/>
             </Grid.RowDefinitions>
 
             <controls:TopBar x:Name="TopBar"
