@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:YukikaHub.UI.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="500">
+             d:DesignHeight="450" d:DesignWidth="500"
+             Loaded="UserControl_Loaded"
+             x:Name="AlbumLookupRoot">
     <!--Data context will be Album-->
     <UserControl.Resources>
         <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
@@ -14,7 +16,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="0" Width="100">
+                        <Border CornerRadius="0" HorizontalAlignment="Stretch">
                             <ContentPresenter/>
                         </Border>
                     </ControlTemplate>
@@ -23,7 +25,8 @@
         </Style>
     </UserControl.Resources>
     
-    <Grid>
+    <Grid x:Name="RootGrid"
+          Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="7*"/>
             <RowDefinition Height="*"/>
@@ -31,15 +34,19 @@
         <Viewbox Stretch="UniformToFill"
                  Name="ImageViewBox">
             <Button Height="{Binding ElementName=ImageViewBox, Path=Height}">
-                <Image Source="/Images/Lovemonth.jpg"
+                <Image Name="Picture"
+                       Source="/Images/Lovemonth.jpg"
                        Stretch="UniformToFill"
                        HorizontalAlignment="Stretch"/>
             </Button>
         </Viewbox>
-        <Viewbox Grid.Row="1">
-            <TextBlock Text="Lovemonth"
-                        FontFamily="Lemon Milk"
-                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Viewbox Grid.Row="1"
+                 Stretch="Uniform"
+                 HorizontalAlignment="Center">
+            <TextBlock Text="{Binding Title}"
+                       Grid.Row="1"
+                       FontFamily="Lemon Milk"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Viewbox>
     </Grid>
 </UserControl>

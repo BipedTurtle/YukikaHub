@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:YukikaHub.UI.Views"
              xmlns:controls="clr-namespace:YukikaHub.UI.UserControls"
              xmlns:styling="clr-namespace:YukikaHub.UI.Attached_Properties"
+             xmlns:vm="clr-namespace:YukikaHub.UI.ViewModels"
+             xmlns:model="clr-namespace:YukikaHub.Model;assembly=YukikaHub.Model"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="800"
              Loaded="UserControl_Loaded">
@@ -14,24 +16,18 @@
         <ScrollViewer>
             <ItemsControl Name="ItemsControl"
                           Tag="3"
-                          VerticalAlignment="Top">
+                          VerticalAlignment="Top" HorizontalAlignment="Center"
+                          ItemsSource="{Binding Albums}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="{Binding ElementName=ItemsControl, Path=Tag}"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-                <controls:AlbumLookup/>
-                <controls:AlbumLookup/>
-                <controls:AlbumLookup/>
-                <controls:AlbumLookup/>
-                <controls:AlbumLookup/>
-                <controls:AlbumLookup/>
-                <controls:AlbumLookup/>
-                <controls:AlbumLookup/>
-                <controls:AlbumLookup/>
-                <controls:AlbumLookup/>
-                <controls:AlbumLookup/>
-                <controls:AlbumLookup/>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type model:Album}">
+                        <controls:AlbumLookup/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
     </Grid>

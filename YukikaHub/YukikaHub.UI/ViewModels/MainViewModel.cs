@@ -48,9 +48,10 @@ namespace YukikaHub.UI.ViewModels
 
 
         #region Event Handlers
-        public void OnSelectedDetailViewChanged(DetailViewChangedEventArgs e)
+        public async void OnSelectedDetailViewChanged(DetailViewChangedEventArgs e)
         {
             this.SelectedDetailViewModel = _detailVmCreator[e.ViewModelName];
+            await this.SelectedDetailViewModel.LoadAsync();
         }
         #endregion
     }
