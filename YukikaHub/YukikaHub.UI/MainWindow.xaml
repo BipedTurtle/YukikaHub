@@ -22,6 +22,9 @@
         <DataTemplate DataType="{x:Type vm:AlbumsViewModel}">
             <view:AlbumsView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:TicketsViewModel}">
+            <view:TicketsView/>
+        </DataTemplate>
     </Window.Resources>
     <md:DialogHost Identifier="MainDialogHost">
         <Grid Background="#FFF0F0F0">

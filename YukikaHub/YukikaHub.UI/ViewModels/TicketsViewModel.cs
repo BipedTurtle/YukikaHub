@@ -10,7 +10,7 @@ namespace YukikaHub.UI.ViewModels
     {
         public Task LoadAsync()
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }
