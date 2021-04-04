@@ -1,10 +1,12 @@
-﻿using Prism.Events;
+﻿using Prism.Commands;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using YukikaHub.UI.Events;
 using YukikaHub.UI.Settings;
 
@@ -20,6 +22,8 @@ namespace YukikaHub.UI.ViewModels
             _eventAggregator = eventAggregator;
             // TODO: this is a dangling event. Make sure you unsubscribe it
             ApplicationSettings.ModeChanged += this.OnModeChanged;
+
+            this.AddMotifyTicketCommand = new DelegateCommand(AddMotifyTicket_Execute);
         }
 
         public Visibility AddButtonVisibility
@@ -31,6 +35,19 @@ namespace YukikaHub.UI.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        #region Commands
+        public ICommand AddMotifyTicketCommand { get; set; }
+        #endregion
+
+        #region Command Handlers
+        public void AddMotifyTicket_Execute()
+        {
+            _eventAggregator
+                .GetEvent<SelectedDetailViewChangedEvent>()
+                .Publish(new DetailViewChangedEventArgs(typeof(AddModifyTicketViewModel).Name));
+        }
+        #endregion
 
         #region Event Handlers
         private void OnModeChanged(ApplicationMode newMode)

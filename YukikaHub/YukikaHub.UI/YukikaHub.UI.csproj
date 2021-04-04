@@ -27,11 +27,15 @@
 
   <ItemGroup>
     <Resource Include="Images\Lovemonth.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Soul Lady.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Global Commands\" />
   </ItemGroup>
 
 </Project>

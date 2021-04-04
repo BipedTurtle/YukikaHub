@@ -9,6 +9,13 @@
              xmlns:dp="clr-namespace:YukikaHub.UI.Dependency_Properties"
              mc:Ignorable="d" 
              d:DesignHeight="910" d:DesignWidth="1020">
+    <UserControl.Resources>
+        <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="32"/>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid Background="WhiteSmoke">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -25,7 +32,8 @@
                            HorizontalAlignment="Center" VerticalAlignment="Center"
                            FontSize="32"/>
                 </Border>
-                <Image Source="{x:Null}"/>
+                <Image Name="TicketImage"
+                       Source="{x:Null}"/>
             </Grid>
 
             <Button Content="Browse Image"

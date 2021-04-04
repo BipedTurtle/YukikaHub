@@ -23,7 +23,6 @@ namespace YukikaHub.UI.Views
     public partial class AddAlbumView : UserControl
     {
         private AddAlbumViewModel _addAlbumViewModel;
-        private (double width, double height) _imageSize;
 
         public AddAlbumView()
         {
@@ -33,22 +32,11 @@ namespace YukikaHub.UI.Views
         private void AddAlbumView_Loaded(object sender, RoutedEventArgs e)
         {
             _addAlbumViewModel = (AddAlbumViewModel)this.DataContext;
-            _addAlbumViewModel.UploadAlbumImage += OnImageChosen_UploadImage;
             _addAlbumViewModel.AlbumUploaded += OnAlbumUploaded_ShowSanckbar;
             _addAlbumViewModel.AlbumUploaded += OnAlbumUploaded_ClearImage;
 
             var messageQueue = new SnackbarMessageQueue(TimeSpan.FromMilliseconds(2500));
             Snackbar.MessageQueue = messageQueue;
-
-            _imageSize = (Rectangle_BlankSlate.ActualWidth, Rectangle_BlankSlate.ActualHeight);
-        }
-
-        private void OnImageChosen_UploadImage(BitmapImage img)
-        {
-            AlbumImage.Source = img;
-            AlbumImage.Width = _imageSize.width;
-            AlbumImage.Height = _imageSize.height;
-            AlbumImage.Visibility = Visibility.Visible;
         }
 
         private void OnAlbumUploaded_ShowSanckbar(string albumName)
@@ -58,7 +46,7 @@ namespace YukikaHub.UI.Views
 
         private void OnAlbumUploaded_ClearImage(string albumName)
         {
-            AlbumImage.Visibility = Visibility.Hidden;
+            AlbumImage.Source = null;
         }
     }
 }

@@ -10,7 +10,7 @@ using YukikaHub.Model;
 
 namespace YukikaHub.UI.Wrapper
 {
-    public class AlbumWrapper : ModelWrapper<Album>
+    public class AlbumWrapper : ModelWrapper<Album>, IImageWrapper
     {
         public AlbumWrapper(Album album)
             : base(album)
@@ -83,6 +83,11 @@ namespace YukikaHub.UI.Wrapper
                 default:
                     break;
             }
+        }
+
+        public void SetImage(byte[] imageByteStream)
+        {
+            this.Picture = imageByteStream;
         }
     }
 }

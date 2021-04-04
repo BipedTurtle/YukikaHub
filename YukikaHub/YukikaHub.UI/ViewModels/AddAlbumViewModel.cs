@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace YukikaHub.UI.ViewModels
 {
-    public class AddAlbumViewModel : ViewModelBase, IDetailViewModel
+    public class AddAlbumViewModel : BrowseImageViewModel, IDetailViewModel
     {
         private Song _selectedSong;
         private ISongRepository _songRepository;
@@ -26,7 +26,6 @@ namespace YukikaHub.UI.ViewModels
         public AddAlbumViewModel(ISongRepository songRepository,
             IAlbumRepository albumRepository)
         {
-            this.BrowseImageCommand = new DelegateCommand(this.BrowseImage_Execute);
             this.UploadAlbumCommand = new DelegateCommand(this.UploadAlbum_Execute, this.UploadAlbum_CanExecute);
             this.AddSongCommand = new DelegateCommand(this.AddSong_Execute);
             this.RemoveSongCommand = new DelegateCommand(this.RemoveSong_Execute, this.RemoveSong_CanExecute);
@@ -40,6 +39,7 @@ namespace YukikaHub.UI.ViewModels
                 if (e.PropertyName == nameof(Album.HasErrors))
                     ((DelegateCommand)UploadAlbumCommand).RaiseCanExecuteChanged();
             };
+            base._imageWrapper = this.Album;
 
             #region a trick to trigger validation
             this.Album.Title = "";
@@ -55,7 +55,6 @@ namespace YukikaHub.UI.ViewModels
         }
 
         #region Events
-        public event Action<BitmapImage> UploadAlbumImage;
         public event Action<string> AlbumUploaded;
         #endregion
 
@@ -79,36 +78,12 @@ namespace YukikaHub.UI.ViewModels
         #endregion
 
         #region Commands
-        public ICommand BrowseImageCommand { get; }
         public ICommand AddSongCommand { get; }
         public ICommand RemoveSongCommand { get; }
         public ICommand UploadAlbumCommand { get; }
         #endregion
 
         #region Command Handlers
-        public void BrowseImage_Execute()
-        {
-            var fileDialog = new OpenFileDialog();
-
-            fileDialog.Filter = "Image Files (*.img;*.jpg)|*img;*jpg;*jpeg";
-            if (fileDialog.ShowDialog() == false)
-                return;
-
-            var uri = new Uri(fileDialog.FileName);
-            var bitmapImage = new BitmapImage();
-            using (var imageStream = new FileStream(fileDialog.FileName, FileMode.Open, FileAccess.Read)) {
-                bitmapImage.BeginInit();
-                bitmapImage.UriSource = uri;
-                bitmapImage.StreamSource = imageStream;
-                bitmapImage.EndInit();
-                this.UploadAlbumImage?.Invoke(bitmapImage);
-
-                using (var reader = new BinaryReader(imageStream)) {
-                    this.Album.Picture = reader.ReadBytes((int)imageStream.Length);
-                }
-            }
-        }
-
         public async void UploadAlbum_Execute()
         {
             if (!this.SongsAreDistinct)
@@ -168,7 +143,7 @@ namespace YukikaHub.UI.ViewModels
 
         public Task LoadAsync()
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
         }
         #endregion
     }

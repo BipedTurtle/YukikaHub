@@ -36,6 +36,8 @@ namespace YukikaHub.UI.Settings
                    .Keyed<IDetailViewModel>(nameof(AlbumsViewModel));
             builder.RegisterType<TicketsViewModel>()
                    .Keyed<IDetailViewModel>(nameof(TicketsViewModel));
+            builder.RegisterType<AddModifyTicketViewModel>()
+                   .Keyed<IDetailViewModel>(nameof(AddModifyTicketViewModel));
 
             return builder.Build();
         }
