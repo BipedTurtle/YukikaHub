@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:YukikaHub.UI.ViewModels"
+                    xmlns:view="clr-namespace:YukikaHub.UI.Views">
+    <Image x:Key="lovemonth"
+               Source="C:\Users\참관자\source\repos\WPF Projects\YukikaHub\YukikaHub\YukikaHub.UI\Images\Lovemonth.jpg"/>
+    <DataTemplate DataType="{x:Type vm:AddAlbumViewModel}">
+        <view:AddAlbumView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AlbumsViewModel}">
+        <view:AlbumsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:TicketsViewModel}">
+        <view:TicketsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AddModifyTicketViewModel}">
+        <view:AddModifyTicketView/>
+    </DataTemplate>
+</ResourceDictionary>

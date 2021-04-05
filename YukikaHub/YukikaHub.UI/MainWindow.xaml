@@ -13,22 +13,6 @@
         WindowStartupLocation="CenterScreen" WindowStyle="None" 
         ResizeMode="NoResize">
 
-    <Window.Resources>
-        <Image x:Key="lovemonth"
-               Source="C:\Users\참관자\source\repos\WPF Projects\YukikaHub\YukikaHub\YukikaHub.UI\Images\Lovemonth.jpg"/>
-        <DataTemplate DataType="{x:Type vm:AddAlbumViewModel}">
-            <view:AddAlbumView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:AlbumsViewModel}">
-            <view:AlbumsView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:TicketsViewModel}">
-            <view:TicketsView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:AddModifyTicketViewModel}">
-            <view:AddModifyTicketView/>
-        </DataTemplate>
-    </Window.Resources>
     <md:DialogHost Identifier="MainDialogHost">
         <Grid Background="#FFF0F0F0">
             <Grid.ColumnDefinitions>
