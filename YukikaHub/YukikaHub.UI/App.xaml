@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="/UI Resources/ModernScroll.xaml"/>
                 <ResourceDictionary Source="/Resources/DetailViewsResourceDictionary.xaml"/>
                 <ResourceDictionary Source="/Resources/ValidationErrorsFormsResourceDictionary.xaml"/>
+                <ResourceDictionary Source="/Resources/ConvertersResourceDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

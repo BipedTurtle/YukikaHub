@@ -11,6 +11,7 @@
              xmlns:view="clr-namespace:YukikaHub.UI.Views"
              mc:Ignorable="d" 
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:model="clr-namespace:YukikaHub.Model;assembly=YukikaHub.Model"
              d:DesignHeight="450" d:DesignWidth="600">
     <UserControl.Resources>
         <Style TargetType="controls:LabeledTextBox">
@@ -24,10 +25,12 @@
     <Grid Background="White"
           Margin="20">
         <ScrollViewer>
-            <ItemsControl>
-                <controls:TicketControl/>
-                <controls:TicketControl/>
-                <controls:TicketControl/>
+            <ItemsControl ItemsSource="{Binding Tickets}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type model:Ticket}">
+                        <controls:TicketControl/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
         <Button x:Name="Button_AddTicket"

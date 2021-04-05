@@ -2,11 +2,13 @@
 using Prism.Events;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using YukikaHub.Model;
 using YukikaHub.UI.Data;
 using YukikaHub.UI.Events;
 using YukikaHub.UI.Settings;
@@ -23,7 +25,7 @@ namespace YukikaHub.UI.ViewModels
             ITicketRepository ticketRepository)
         {
             _eventAggregator = eventAggregator;
-            // TODO: this is a dangling event. Make sure you unsubscribe it
+            _ticketRepository = ticketRepository;
             ApplicationSettings.ModeChanged += this.OnModeChanged;
 
             this.AddMotifyTicketCommand = new DelegateCommand(AddMotifyTicket_Execute);
@@ -33,6 +35,7 @@ namespace YukikaHub.UI.ViewModels
                 .Subscribe(OnSelectedDetailViewChanged);
         }
 
+        #region Properties
         public Visibility AddButtonVisibility
         {
             get => _buttonVisibility;
@@ -42,6 +45,8 @@ namespace YukikaHub.UI.ViewModels
                 OnPropertyChanged();
             }
         }
+        public ObservableCollection<Ticket> Tickets { get; set; } = new ObservableCollection<Ticket>();
+        #endregion
 
         #region Commands
         public ICommand AddMotifyTicketCommand { get; set; }
@@ -78,9 +83,13 @@ namespace YukikaHub.UI.ViewModels
         }
         #endregion
 
-        public Task LoadAsync()
+        public async Task LoadAsync()
         {
-            return Task.CompletedTask;
+            this.Tickets.Clear();
+
+            var tickets = await _ticketRepository.GetAllNoTrackingAsync();
+            foreach (var ticket in tickets)
+                this.Tickets.Add(ticket);
         }
     }
 }

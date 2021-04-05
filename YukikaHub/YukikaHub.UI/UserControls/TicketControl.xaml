@@ -23,7 +23,9 @@
                 <Style TargetType="Button">
                     <Setter Property="Background">
                         <Setter.Value>
-                            <ImageBrush ImageSource="/Images/Lovemonth.jpg"
+                            <ImageBrush d:ImageSource="/Images/Lovemonth.jpg"
+                                        x:Name="LookupImage"
+                                        ImageSource="{Binding Image, Converter={StaticResource BytesToBitmapImageConverter}}"
                                         Stretch="UniformToFill"/>
                         </Setter.Value>
                     </Setter>
@@ -41,7 +43,7 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background">
                                 <Setter.Value>
-                                    <ImageBrush ImageSource="/Images/Lovemonth.jpg"
+                                    <ImageBrush ImageSource="{Binding Image, Converter={StaticResource BytesToBitmapImageConverter}}"
                                                 Opacity=".8"
                                                 Stretch="UniformToFill"/>
                                 </Setter.Value>
@@ -65,15 +67,15 @@
                 </DockPanel.Resources>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Title:"/>
-                    <Label Content="Seattle Concert"/>
+                    <Label Content="{Binding Title}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Date:"/>
-                    <Label Content="2/16/2021"/>
+                    <Label Content="{Binding Date, StringFormat=M/dd//yyyy}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Price:"/>
-                    <Label Content="$77"/>
+                    <Label Content="{Binding Price, Converter={StaticResource StringToDoubleConverter}}"/>
                 </StackPanel>
                 <Grid VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
@@ -83,7 +85,8 @@
                     <Label Content="Description"
                            Margin="0 10 0 5"/>
                     <TextBox Grid.Row="1"
-                             Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             Text="{Binding Description}"/>
                 </Grid>
             </DockPanel>
         </GroupBox>
