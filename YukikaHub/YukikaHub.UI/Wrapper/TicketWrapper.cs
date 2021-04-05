@@ -38,9 +38,29 @@ namespace YukikaHub.UI.Wrapper
             set { SetValue<byte[]>(value); }
         }
 
+        public string Description
+        {
+            get => GetValue<string>();
+            set { SetValue<string>(value); }
+        }
+
         public void SetImage(byte[] imageByteStream)
         {
             this.Image = imageByteStream;
+        }
+
+        protected override IEnumerable<string> ValidateProperty(string propertyName)
+        {
+            switch (propertyName)
+            {
+                case nameof(Date):
+                    var today = DateTime.Today;
+                    if (this.Date < today)
+                        yield return "The date cannot be before the date today";
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

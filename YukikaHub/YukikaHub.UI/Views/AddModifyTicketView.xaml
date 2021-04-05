@@ -6,13 +6,40 @@
              xmlns:local="clr-namespace:YukikaHub.UI.Views"
              xmlns:controls="clr-namespace:YukikaHub.UI.UserControls"
              xmlns:styling="clr-namespace:YukikaHub.UI.Attached_Properties"
+             xmlns:converters="clr-namespace:YukikaHub.UI.Converters"
              xmlns:dp="clr-namespace:YukikaHub.UI.Dependency_Properties"
              mc:Ignorable="d" 
              d:DesignHeight="910" d:DesignWidth="1020">
     <UserControl.Resources>
+        <converters:StringToDoubleConverter x:Key="StringToDoubleConverter"/>
         <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="32"/>
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder Name="Adorned"/>
+                            <TextBlock Text="{Binding ElementName=Adorned,Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"
+                                   Foreground="red" Background="{x:Null}"
+                                   FontSize="12"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="DatePicker" BasedOn="{StaticResource MaterialDesignDatePicker}">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder Name="Adorned"/>
+                            <TextBlock Text="{Binding ElementName=Adorned, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"
+                                       Foreground="Red" FontSize="12"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
     
@@ -43,6 +70,10 @@
                     Command="{Binding BrowseImageCommand}"
                     CommandParameter="{Binding ElementName=TicketImage}"
                     Background="#FFFFAFBE" BorderBrush="#FFFFAFBE"/>
+            <TextBlock d:Text="Every ticket needs a cover image"
+                       Text="{Binding ImageErrorText}"
+                       FontSize="20" Foreground="Red"
+                       HorizontalAlignment="Center"/>
         </StackPanel>
         <StackPanel Name="InfoPanel"
                     Margin="10" 
@@ -53,35 +84,34 @@
                        DockPanel.Dock="Left"
                        FontSize="32"
                        Width="80"/>
-                <TextBox DockPanel.Dock="Left"/>
+                <TextBox DockPanel.Dock="Left"
+                         Text="{Binding TicketWrapper.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </DockPanel>
             <DockPanel>
                 <Label Content="Price"
                        DockPanel.Dock="Left"
                        FontSize="32"
                        Width="80"/>
-                <TextBox DockPanel.Dock="Left"/>
+                <TextBox DockPanel.Dock="Left"
+                         Text="{Binding TicketWrapper.Price, Mode=TwoWay, UpdateSourceTrigger=LostFocus, Converter={StaticResource StringToDoubleConverter}}"/>
             </DockPanel>
             <DockPanel>
-                <Label Content="Date"
+                <Label Name="DateLabel"
+                       Content="Date"
                        DockPanel.Dock="Left"
                        FontSize="32"
                        Width="80"/>
-                <TextBox DockPanel.Dock="Left"/>
+                <DatePicker Height="{Binding ElementName=DateLabel, Path=ActualHeight, UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="24"
+                            SelectedDate="{Binding TicketWrapper.Date}"/>
             </DockPanel>
-            <DockPanel>
-                <Label Content="Title"
-                       DockPanel.Dock="Left"
-                       FontSize="32"
-                       Width="80"/>
-                <TextBox DockPanel.Dock="Left"/>
-            </DockPanel>
-            <StackPanel Margin="0 10">
+            <StackPanel>
                 <Label Content="Description"
+                       Margin="0 75 0 0"
                        FontSize="32" FontWeight="Bold"/>
                 <TextBox Height="234"
-                         Margin="0 10"
-                         Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         Text="{Binding TicketWrapper.Description}"/>
             </StackPanel>
         </StackPanel>
 
@@ -93,12 +123,13 @@
                     Background="#FFFF4747" BorderBrush="#FFFF4747"
                     FontSize="28"
                     Margin="10 0"
-                    Width="125" Height="60"/>
+                    Width="125" Height="60"
+                    Command="{Binding ClearCommand}"/>
             <Button Content="Update" 
-                    Background="#FF29CB7A" BorderBrush="#FF29CB7A"                 
+                    Background="#FF29CB7A" BorderBrush="#FF29CB7A"
                     FontSize="28"
+                    Command="{Binding UpdateCommand}"
                     Width="125" Height="60"/>
-
         </StackPanel>
     </Grid>
 </UserControl>

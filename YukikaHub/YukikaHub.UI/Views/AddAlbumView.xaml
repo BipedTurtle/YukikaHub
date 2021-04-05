@@ -15,27 +15,6 @@
              Loaded="AddAlbumView_Loaded">
     <UserControl.Resources>
         <converters:StringToDoubleConverter x:Key="StringDoubleConverter"/>
-        <Style TargetType="controls:LabeledTextBox">
-            <Setter Property="Validation.ErrorTemplate">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <StackPanel>
-                            <AdornedElementPlaceholder x:Name="adorned"/>
-                            <TextBlock Text="{Binding ElementName=adorned, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" 
-                                                   Foreground="Red"/>
-                        </StackPanel>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="FontSize" Value="24"/>
-            <Setter Property="dp:LabeledTextBox.Style"
-                                Value="{StaticResource MaterialDesignTextBox}"/>
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="True">
-                    <Setter Property="dp:LabeledTextBox.Background" Value="#ff4d4d"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
     </UserControl.Resources>
     
     <ScrollViewer>

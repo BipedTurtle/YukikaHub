@@ -6,19 +6,74 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using YukikaHub.Model;
+using YukikaHub.UI.Data;
 using YukikaHub.UI.Wrapper;
 
 namespace YukikaHub.UI.ViewModels
 {
     public class AddModifyTicketViewModel : BrowseImageViewModel, IDetailViewModel
     {
-        public AddModifyTicketViewModel()
+        private ITicketRepository _ticketRepository;
+
+        public AddModifyTicketViewModel(ITicketRepository ticketRepository)
         {
             this.TicketWrapper = new TicketWrapper(new Ticket());
+            this.TicketWrapper.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(this.TicketWrapper.HasErrors))
+                    ((DelegateCommand)UpdateCommand).RaiseCanExecuteChanged();
+            };
+
             base._imageWrapper = this.TicketWrapper;
+            _ticketRepository = ticketRepository;
+
+            this.ClearCommand = new DelegateCommand(Clear);
+            this.UpdateCommand = new DelegateCommand(Update, CanUpdate);
+
+            // Trigger validation upon loading
+            this.TicketWrapper.Title = "";
+            this.TicketWrapper.Price = -1;
+            this.TicketWrapper.Date = DateTime.Today;
         }
 
-        public TicketWrapper TicketWrapper { get; }
+        #region Properties
+        public TicketWrapper TicketWrapper { get; private set; }
+        #endregion
+
+        #region Commands
+        public ICommand ClearCommand { get; }
+        public ICommand UpdateCommand { get; }
+        #endregion
+
+        #region Command Handlers
+        private void Clear()
+        {
+            this.TicketWrapper = new TicketWrapper(new Ticket());
+            base.OnPropertyChanged(nameof(this.TicketWrapper));
+        }
+
+        public async void Update()
+        {
+            _ticketRepository.Add(this.TicketWrapper.Model);
+            await _ticketRepository.SaveAsync();
+
+            this.Clear();
+        }
+
+        public bool CanUpdate()
+        {
+            return
+                !this.TicketWrapper.HasErrors &&
+                this.TicketWrapper.Image != null;
+        }
+
+        public override void BrowseImage(object ImageControl)
+        {
+            base.BrowseImage(ImageControl);
+
+            ((DelegateCommand)UpdateCommand).RaiseCanExecuteChanged();
+        }
+        #endregion
 
         public Task LoadAsync()
         {

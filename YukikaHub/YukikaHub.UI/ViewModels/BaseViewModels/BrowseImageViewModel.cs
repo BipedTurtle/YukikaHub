@@ -16,15 +16,30 @@ namespace YukikaHub.UI.ViewModels
     public abstract class BrowseImageViewModel : ViewModelBase
     {
         protected IImageWrapper _imageWrapper;
+        protected string _imageErrorText;
+        protected readonly string _imageErrorTextContent = "Every ticket needs a cover image";
+
 
         public BrowseImageViewModel()
         {
             this.BrowseImageCommand = new DelegateCommand<object>(this.BrowseImage);
+            this.ImageErrorText = _imageErrorTextContent;
         }
+
+        public string ImageErrorText
+        {
+            get => _imageErrorText;
+            set
+            {
+                _imageErrorText = value;
+                base.OnPropertyChanged();
+            }
+        }
+
 
         public ICommand BrowseImageCommand { get; set; }
 
-        public void BrowseImage(object ImageControl)
+        public virtual void BrowseImage(object ImageControl)
         {
             var browseImage = (Image)ImageControl;
             var fileDialog = new OpenFileDialog();
@@ -47,6 +62,7 @@ namespace YukikaHub.UI.ViewModels
                 {
                     var imageByteStream = reader.ReadBytes((int)imageStream.Length);
                     _imageWrapper.SetImage(imageByteStream);
+                    this.ImageErrorText = string.Empty;
                 }
             }
         }

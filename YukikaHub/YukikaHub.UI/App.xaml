@@ -11,6 +11,7 @@
                 <md:CustomColorTheme BaseTheme="Light" PrimaryColor="#3B5998" SecondaryColor="#ADB9D3" />
                 <ResourceDictionary Source="/UI Resources/ModernScroll.xaml"/>
                 <ResourceDictionary Source="/Resources/DetailViewsResourceDictionary.xaml"/>
+                <ResourceDictionary Source="/Resources/ValidationErrorsFormsResourceDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

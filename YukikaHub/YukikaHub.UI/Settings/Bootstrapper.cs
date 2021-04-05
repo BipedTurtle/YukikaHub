@@ -26,6 +26,7 @@ namespace YukikaHub.UI.Settings
 
             builder.RegisterType<AlbumRepository>().As<IAlbumRepository>();
             builder.RegisterType<SongRepository>().As<ISongRepository>();
+            builder.RegisterType<TicketRepository>().As<ITicketRepository>();
 
             builder.RegisterType<BasicToolbarViewModel>().As<IBasicToolBarViewModel>();
             builder.RegisterType<NavigationViewModel>().As<INavigationViewModel>();
