@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using YukikaHub.UI.Data;
 using YukikaHub.UI.Events;
 using YukikaHub.UI.Settings;
 
@@ -16,14 +17,20 @@ namespace YukikaHub.UI.ViewModels
     {
         private IEventAggregator _eventAggregator;
         private Visibility _buttonVisibility = Visibility.Hidden;
+        private ITicketRepository _ticketRepository;
 
-        public TicketsViewModel(IEventAggregator eventAggregator)
+        public TicketsViewModel(IEventAggregator eventAggregator,
+            ITicketRepository ticketRepository)
         {
             _eventAggregator = eventAggregator;
             // TODO: this is a dangling event. Make sure you unsubscribe it
             ApplicationSettings.ModeChanged += this.OnModeChanged;
 
             this.AddMotifyTicketCommand = new DelegateCommand(AddMotifyTicket_Execute);
+
+            _eventAggregator
+                .GetEvent<SelectedDetailViewChangedEvent>()
+                .Subscribe(OnSelectedDetailViewChanged);
         }
 
         public Visibility AddButtonVisibility
@@ -63,6 +70,11 @@ namespace YukikaHub.UI.ViewModels
                 default:
                     break;
             }
+        }
+        private void OnSelectedDetailViewChanged(DetailViewChangedEventArgs e)
+        {
+            if (e.ViewModelName != nameof(TicketsViewModel))
+                ApplicationSettings.ModeChanged -= this.OnModeChanged;
         }
         #endregion
 
