@@ -24,7 +24,7 @@ namespace YukikaHub.UI.ViewModels
 
         public ICommand BrowseImageCommand { get; set; }
 
-        public virtual void BrowseImage(object ImageControl)
+        public void BrowseImage(object ImageControl)
         {
             var browseImage = (Image)ImageControl;
             var fileDialog = new OpenFileDialog();

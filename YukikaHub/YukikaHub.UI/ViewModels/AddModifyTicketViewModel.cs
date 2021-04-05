@@ -5,22 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using YukikaHub.Model;
+using YukikaHub.UI.Wrapper;
 
 namespace YukikaHub.UI.ViewModels
 {
-    public class AddModifyTicketViewModel : ViewModelBase, IDetailViewModel
+    public class AddModifyTicketViewModel : BrowseImageViewModel, IDetailViewModel
     {
-        public ICommand MyCommand { get; set; }
         public AddModifyTicketViewModel()
         {
-            MyCommand = new DelegateCommand(MyCommand_Execute);
+            this.TicketWrapper = new TicketWrapper(new Ticket());
+            base._imageWrapper = this.TicketWrapper;
         }
 
-        private void MyCommand_Execute()
-        {
-
-
-        }
+        public TicketWrapper TicketWrapper { get; }
 
         public Task LoadAsync()
         {

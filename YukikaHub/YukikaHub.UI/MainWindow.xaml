@@ -25,6 +25,9 @@
         <DataTemplate DataType="{x:Type vm:TicketsViewModel}">
             <view:TicketsView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AddModifyTicketViewModel}">
+            <view:AddModifyTicketView/>
+        </DataTemplate>
     </Window.Resources>
     <md:DialogHost Identifier="MainDialogHost">
         <Grid Background="#FFF0F0F0">

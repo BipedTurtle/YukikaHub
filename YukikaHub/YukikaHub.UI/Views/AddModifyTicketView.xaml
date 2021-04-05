@@ -39,7 +39,9 @@
             <Button Content="Browse Image"
                     Height="75"
                     Margin="0 20"
-                    FontSize="30" 
+                    FontSize="30"
+                    Command="{Binding BrowseImageCommand}"
+                    CommandParameter="{Binding ElementName=TicketImage}"
                     Background="#FFFFAFBE" BorderBrush="#FFFFAFBE"/>
         </StackPanel>
         <StackPanel Name="InfoPanel"
