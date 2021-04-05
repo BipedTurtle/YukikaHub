@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using MaterialDesignThemes.Wpf;
+using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace YukikaHub.UI.ViewModels
     public class AddModifyTicketViewModel : BrowseImageViewModel, IDetailViewModel
     {
         private ITicketRepository _ticketRepository;
+        private SnackbarMessageQueue _messageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(2));
 
         public AddModifyTicketViewModel(ITicketRepository ticketRepository)
         {
@@ -38,6 +40,16 @@ namespace YukikaHub.UI.ViewModels
 
         #region Properties
         public TicketWrapper TicketWrapper { get; private set; }
+        
+        public SnackbarMessageQueue MessageQueue
+        {
+            get => _messageQueue;
+            set
+            {
+                _messageQueue = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region Commands
@@ -50,12 +62,14 @@ namespace YukikaHub.UI.ViewModels
         {
             this.TicketWrapper = new TicketWrapper(new Ticket());
             base.OnPropertyChanged(nameof(this.TicketWrapper));
+            base._browseImage.Source = null;
         }
 
         public async void Update()
         {
             _ticketRepository.Add(this.TicketWrapper.Model);
             await _ticketRepository.SaveAsync();
+            this.MessageQueue.Enqueue($"Ticket '{this.TicketWrapper.Title}' Updated");
 
             this.Clear();
         }

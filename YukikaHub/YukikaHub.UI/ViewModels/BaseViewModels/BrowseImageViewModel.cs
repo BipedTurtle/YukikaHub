@@ -18,6 +18,7 @@ namespace YukikaHub.UI.ViewModels
         protected IImageWrapper _imageWrapper;
         protected string _imageErrorText;
         protected readonly string _imageErrorTextContent = "Every ticket needs a cover image";
+        protected Image _browseImage;
 
 
         public BrowseImageViewModel()
@@ -41,7 +42,7 @@ namespace YukikaHub.UI.ViewModels
 
         public virtual void BrowseImage(object ImageControl)
         {
-            var browseImage = (Image)ImageControl;
+            _browseImage = (Image)ImageControl;
             var fileDialog = new OpenFileDialog();
 
             fileDialog.Filter = "Image Files (*.img;*.jpg)|*img;*jpg;*jpeg";
@@ -56,7 +57,7 @@ namespace YukikaHub.UI.ViewModels
                 bitmapImage.UriSource = uri;
                 bitmapImage.StreamSource = imageStream;
                 bitmapImage.EndInit();
-                browseImage.Source = bitmapImage;
+                _browseImage.Source = bitmapImage;
 
                 using (var reader = new BinaryReader(imageStream))
                 {

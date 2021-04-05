@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:YukikaHub.UI.Views"
              xmlns:controls="clr-namespace:YukikaHub.UI.UserControls"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:styling="clr-namespace:YukikaHub.UI.Attached_Properties"
              xmlns:converters="clr-namespace:YukikaHub.UI.Converters"
              xmlns:dp="clr-namespace:YukikaHub.UI.Dependency_Properties"
@@ -60,7 +61,8 @@
                            FontSize="32"/>
                 </Border>
                 <Image Name="TicketImage"
-                       Source="{x:Null}"/>
+                       Source="{x:Null}"
+                       Stretch="UniformToFill"/>
             </Grid>
 
             <Button Content="Browse Image"
@@ -111,7 +113,8 @@
                        FontSize="32" FontWeight="Bold"/>
                 <TextBox Height="234"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         Text="{Binding TicketWrapper.Description}"/>
+                         Text="{Binding TicketWrapper.Description}"
+                         TextWrapping="Wrap" AcceptsReturn="True"/>
             </StackPanel>
         </StackPanel>
 
@@ -125,11 +128,15 @@
                     Margin="10 0"
                     Width="125" Height="60"
                     Command="{Binding ClearCommand}"/>
-            <Button Content="Update" 
+            <Button Content="Upload" 
                     Background="#FF29CB7A" BorderBrush="#FF29CB7A"
                     FontSize="28"
                     Command="{Binding UpdateCommand}"
                     Width="125" Height="60"/>
         </StackPanel>
+
+        <md:Snackbar Name="Snackbar"
+                     Grid.ColumnSpan="2"
+                     MessageQueue="{Binding MessageQueue}"/>
     </Grid>
 </UserControl>
