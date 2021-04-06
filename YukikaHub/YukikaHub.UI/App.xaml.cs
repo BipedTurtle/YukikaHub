@@ -17,9 +17,7 @@ namespace YukikaHub.UI
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            var bootstrapper = new Bootstrapper();
-            var container = bootstrapper.BootsTrap();
-
+            var container = Bootstrapper.Container;
             var mainWindow = container.Resolve<MainWindow>();
             mainWindow.Show();
         }

@@ -55,7 +55,7 @@
         </Button>
 
         <GroupBox Grid.Column="1"
-                  Header="Seattle Concert"
+                  Header="{Binding Title}" d:Header="Seoul Concert"
                   Margin="2 0"
                   BorderThickness="0"
                   FontFamily="LEMON MILK Medium">
@@ -66,16 +66,15 @@
                     </Style>
                 </DockPanel.Resources>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Title:"/>
-                    <Label Content="{Binding Title}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
                     <Label Content="Date:"/>
-                    <Label Content="{Binding Date, StringFormat=M/dd//yyyy}"/>
+                    <Label Content="{Binding Date, StringFormat=M/dd//yyyy}"
+                           d:Content="2/16/1993"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Price:"/>
-                    <Label Content="{Binding Price, Converter={StaticResource StringToDoubleConverter}}"/>
+                    <Label Content="{Binding Price, Converter={StaticResource StringToDoubleConverter}}"
+                           ContentStringFormat="$ {0}"
+                           d:Content="33"/>
                 </StackPanel>
                 <Grid VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>

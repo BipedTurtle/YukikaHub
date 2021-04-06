@@ -29,6 +29,7 @@ namespace YukikaHub.UI.ViewModels
             _eventAggregator
                 .GetEvent<SelectedDetailViewChangedEvent>()
                 .Subscribe(OnSelectedDetailViewChanged);
+            var id = _eventAggregator.GetHashCode();
         }
 
         #region Properties

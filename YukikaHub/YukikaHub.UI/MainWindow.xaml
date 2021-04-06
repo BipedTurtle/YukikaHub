@@ -14,7 +14,7 @@
         ResizeMode="NoResize">
 
     <md:DialogHost Identifier="MainDialogHost">
-        <Grid Background="#FFF0F0F0">
+        <Grid Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="1020"/>

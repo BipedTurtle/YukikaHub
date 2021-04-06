@@ -14,7 +14,18 @@ namespace YukikaHub.UI.Settings
 {
     public class Bootstrapper
     {
-        public IContainer BootsTrap()
+        private static IContainer _container;
+        public static IContainer Container
+        {
+            get
+            {
+                if (_container == null)
+                    _container = BootsTrap();
+                return _container;
+            }
+        }
+
+        private static IContainer BootsTrap()
         {
             var builder = new ContainerBuilder();
 

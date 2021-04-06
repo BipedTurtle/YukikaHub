@@ -9,6 +9,8 @@
              xmlns:styling="clr-namespace:YukikaHub.UI.Attached_Properties"
              xmlns:converters="clr-namespace:YukikaHub.UI.Converters"
              xmlns:dp="clr-namespace:YukikaHub.UI.Dependency_Properties"
+             xmlns:command="clr-namespace:YukikaHub.UI.Global_Commands"
+             xmlns:vm="clr-namespace:YukikaHub.UI.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="910" d:DesignWidth="1020">
     <UserControl.Resources>
@@ -49,6 +51,18 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
+        <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                Margin="20"
+                VerticalAlignment="Top" HorizontalAlignment="Left"
+                Width="50" Height="50"
+                Panel.ZIndex="1" Background="#FFF78E7D"
+                Command="command:NavigationCommands.BackCommand"
+                CommandParameter="{x:Type vm:TicketsViewModel}">
+            <md:PackIcon Kind="ArrowBack"
+                         Width="35" Height="35"         
+                         Foreground="White"/>
+        </Button>
 
         <StackPanel Name="ImagePanel"
                     Margin="10">
