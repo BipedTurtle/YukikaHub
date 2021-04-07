@@ -4,6 +4,6 @@ namespace YukikaHub.UI.ViewModels
 {
     public interface IDetailViewModel
     {
-        Task LoadAsync();
+        Task LoadAsync(object parameter);
     }
 }

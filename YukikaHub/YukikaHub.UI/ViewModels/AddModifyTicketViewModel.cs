@@ -89,8 +89,14 @@ namespace YukikaHub.UI.ViewModels
         }
         #endregion
 
-        public Task LoadAsync()
+        public Task LoadAsync(object parameter)
         {
+            var ticket = parameter as Ticket;
+            if (ticket == null)
+                return Task.CompletedTask;
+
+            this.TicketWrapper = new TicketWrapper(ticket);
+            base.OnPropertyChanged(nameof(this.TicketWrapper));
             return Task.CompletedTask;
         }
     }

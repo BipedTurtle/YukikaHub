@@ -14,6 +14,9 @@ namespace YukikaHub.UI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null)
+                return null;
+
             var bitmapImg = new BitmapImage();
             var byteStream = (byte[])value;
 

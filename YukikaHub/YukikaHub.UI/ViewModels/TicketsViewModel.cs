@@ -45,7 +45,7 @@ namespace YukikaHub.UI.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<Ticket> Tickets { get; set; } = new ObservableCollection<Ticket>();
+        public ObservableCollection<TicketControlViewModel> TicketControlViewModels { get; set; } = new ObservableCollection<TicketControlViewModel>();
         #endregion
 
         #region Commands
@@ -83,13 +83,14 @@ namespace YukikaHub.UI.ViewModels
         }
         #endregion
 
-        public async Task LoadAsync()
+        public async Task LoadAsync(object parameter)
         {
-            this.Tickets.Clear();
+            this.TicketControlViewModels.Clear();
 
             var tickets = await _ticketRepository.GetAllNoTrackingAsync();
-            foreach (var ticket in tickets)
-                this.Tickets.Add(ticket);
+            var ticketControlViewModels = tickets.Select(t => new TicketControlViewModel(_eventAggregator, t));
+            foreach (var ticketVm in ticketControlViewModels)
+                this.TicketControlViewModels.Add(ticketVm);
         }
     }
 }

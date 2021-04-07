@@ -30,7 +30,7 @@ namespace YukikaHub.UI.ViewModels
         }
 
         public event EventHandler AlbumsLoaded;
-        public async Task LoadAsync()
+        public async Task LoadAsync(object parameter)
         {
             var albums = (await _albumRepository.GetAllNoTrackingAsync()).ToList();
 

@@ -25,9 +25,9 @@
     <Grid Background="White"
           Margin="20">
         <ScrollViewer>
-            <ItemsControl ItemsSource="{Binding Tickets}">
+            <ItemsControl ItemsSource="{Binding TicketControlViewModels}">
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type model:Ticket}">
+                    <DataTemplate DataType="{x:Type vm:TicketControlViewModel}">
                         <controls:TicketControl/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

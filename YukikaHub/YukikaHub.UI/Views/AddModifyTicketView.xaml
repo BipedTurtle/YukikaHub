@@ -75,7 +75,7 @@
                            FontSize="32"/>
                 </Border>
                 <Image Name="TicketImage"
-                       Source="{x:Null}"
+                       Source="{Binding TicketWrapper.Image, Converter={StaticResource BytesToBitmapImageConverter}}"
                        Stretch="UniformToFill"/>
             </Grid>
 

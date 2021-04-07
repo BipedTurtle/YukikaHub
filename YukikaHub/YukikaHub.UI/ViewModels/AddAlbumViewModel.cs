@@ -141,7 +141,7 @@ namespace YukikaHub.UI.ViewModels
             return this.SelectedSong != null;
         }
 
-        public Task LoadAsync()
+        public Task LoadAsync(object parameter)
         {
             return Task.CompletedTask;
         }

@@ -13,11 +13,13 @@ namespace YukikaHub.UI.Events
 
     public class DetailViewChangedEventArgs
     {
-        public DetailViewChangedEventArgs(string viewModel)
+        public DetailViewChangedEventArgs(string viewModel, object parameter = null)
         {
             this.ViewModelName = viewModel;
+            this.Parameter = parameter;
         }
 
         public string ViewModelName { get; set; }
+        public object Parameter { get; set; }
     }
 }
