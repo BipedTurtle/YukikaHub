@@ -15,5 +15,7 @@ namespace YukikaHub.UI.Data
         {
 
         }
+
+        public YukikaHubDbContext Context => _context;
     }
 }

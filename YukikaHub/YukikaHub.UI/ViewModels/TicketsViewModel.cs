@@ -87,7 +87,7 @@ namespace YukikaHub.UI.ViewModels
         {
             this.TicketControlViewModels.Clear();
 
-            var tickets = await _ticketRepository.GetAllNoTrackingAsync();
+            var tickets = await _ticketRepository.GetAllAsync();
             var ticketControlViewModels = tickets.Select(t => new TicketControlViewModel(_eventAggregator, t));
             foreach (var ticketVm in ticketControlViewModels)
                 this.TicketControlViewModels.Add(ticketVm);

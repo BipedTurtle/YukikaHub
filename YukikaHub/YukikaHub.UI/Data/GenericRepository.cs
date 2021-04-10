@@ -11,7 +11,7 @@ namespace YukikaHub.UI.Data
         where TEntity : class
         where TContext : DbContext
     {
-        protected TContext _context;
+        public TContext _context;
         public GenericRepository(TContext context)
         {
             _context = context;
@@ -56,6 +56,11 @@ namespace YukikaHub.UI.Data
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
+        }
+
+        public void SetState(TEntity entity, EntityState entityState)
+        {
+            _context.Entry<TEntity>(entity).State = entityState;
         }
     }
 }

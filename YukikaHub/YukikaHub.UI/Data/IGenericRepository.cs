@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,6 @@ namespace YukikaHub.UI.Data
         Task<T> GetByIdAsync(int id);
         bool HasChanges();
         Task SaveAsync();
+        void SetState(T entity, EntityState entityState);
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YukikaHub.Model;
+using YukikaHub.UI.ViewModels;
 
 namespace YukikaHub.UI.Wrapper
 {

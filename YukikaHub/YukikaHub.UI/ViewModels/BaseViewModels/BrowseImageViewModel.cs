@@ -19,11 +19,11 @@ namespace YukikaHub.UI.ViewModels
         protected string _imageErrorText;
         protected readonly string _imageErrorTextContent = "Every ticket needs a cover image";
         protected Image _browseImage;
-
+        protected List<ICommand> StateChangingCommands = new List<ICommand>();
 
         public BrowseImageViewModel()
         {
-            this.BrowseImageCommand = new DelegateCommand<object>(this.BrowseImage);
+            this.BrowseImageCommand = new DelegateCommand<object>(BrowseImage);
             this.ImageErrorText = _imageErrorTextContent;
         }
 
@@ -66,6 +66,9 @@ namespace YukikaHub.UI.ViewModels
                     this.ImageErrorText = string.Empty;
                 }
             }
+
+            foreach (var command in this.StateChangingCommands)
+                ((DelegateCommand)command).RaiseCanExecuteChanged();
         }
     }
 }

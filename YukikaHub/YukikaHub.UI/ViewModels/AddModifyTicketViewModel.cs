@@ -1,14 +1,15 @@
 ﻿using MaterialDesignThemes.Wpf;
+using Microsoft.EntityFrameworkCore;
 using Prism.Commands;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using YukikaHub.DataAccess;
 using YukikaHub.Model;
 using YukikaHub.UI.Data;
 using YukikaHub.UI.Wrapper;
+
 
 namespace YukikaHub.UI.ViewModels
 {
@@ -16,21 +17,18 @@ namespace YukikaHub.UI.ViewModels
     {
         private ITicketRepository _ticketRepository;
         private SnackbarMessageQueue _messageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(2));
+        private TicketWrapper _ticketWrapper;
 
-        public AddModifyTicketViewModel(ITicketRepository ticketRepository)
+        public AddModifyTicketViewModel(ITicketRepository ticketRepository
+            ,YukikaHubDbContext context)
         {
-            this.TicketWrapper = new TicketWrapper(new Ticket());
-            this.TicketWrapper.PropertyChanged += (s, e) =>
-            {
-                if (e.PropertyName == nameof(this.TicketWrapper.HasErrors))
-                    ((DelegateCommand)UpdateCommand).RaiseCanExecuteChanged();
-            };
-
-            base._imageWrapper = this.TicketWrapper;
             _ticketRepository = ticketRepository;
+            this.TicketWrapper = new TicketWrapper(new Ticket());
+            this.EnableTicketWrapperChangeDetection();
 
             this.ClearCommand = new DelegateCommand(Clear);
             this.UpdateCommand = new DelegateCommand(Update, CanUpdate);
+            base.StateChangingCommands.Add(this.UpdateCommand);
 
             // Trigger validation upon loading
             this.TicketWrapper.Title = "";
@@ -39,7 +37,15 @@ namespace YukikaHub.UI.ViewModels
         }
 
         #region Properties
-        public TicketWrapper TicketWrapper { get; private set; }
+        public TicketWrapper TicketWrapper
+        {
+            get => _ticketWrapper;
+            set
+            {
+                _ticketWrapper = value;
+                base._imageWrapper = TicketWrapper;
+            }
+        }
         
         public SnackbarMessageQueue MessageQueue
         {
@@ -50,6 +56,8 @@ namespace YukikaHub.UI.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public bool HasChanges() => _ticketRepository.HasChanges();
         #endregion
 
         #region Commands
@@ -67,37 +75,63 @@ namespace YukikaHub.UI.ViewModels
 
         public async void Update()
         {
-            _ticketRepository.Add(this.TicketWrapper.Model);
-            await _ticketRepository.SaveAsync();
-            this.MessageQueue.Enqueue($"Ticket '{this.TicketWrapper.Title}' Updated");
+            var ticket = this.TicketWrapper.Model;
+            var entityState = ticket.Id == 0 ? EntityState.Added : EntityState.Modified;
+            _ticketRepository.SetState(this.TicketWrapper.Model, entityState);
 
-            this.Clear();
+            await _ticketRepository.SaveAsync();
+            this.MessageQueue.Enqueue($"Ticket '{this.TicketWrapper.Title}' {entityState.ToString()}");
+
+            if (entityState == EntityState.Added)
+                this.Clear();
+            ((DelegateCommand)UpdateCommand).RaiseCanExecuteChanged();
         }
 
         public bool CanUpdate()
         {
             return
                 !this.TicketWrapper.HasErrors &&
-                this.TicketWrapper.Image != null;
+                this.TicketWrapper.Image != null &&
+                this.HasChanges();
         }
 
         public override void BrowseImage(object ImageControl)
         {
             base.BrowseImage(ImageControl);
 
+            var entry = _ticketRepository.Context.ChangeTracker.Entries<Ticket>().SingleOrDefault(e => e.Entity.Id == this.TicketWrapper.Model.Id);
+            entry.Property(t => t.Image).IsModified = true;
+
             ((DelegateCommand)UpdateCommand).RaiseCanExecuteChanged();
         }
         #endregion
 
-        public Task LoadAsync(object parameter)
+        public static byte[] imageFirstLoaded;
+        public async Task LoadAsync(object parameter)
         {
             var ticket = parameter as Ticket;
-            if (ticket == null)
-                return Task.CompletedTask;
+            if (ticket.Id != 0)
+                ticket = await _ticketRepository.GetByIdAsync(ticket.Id);
+
+            imageFirstLoaded = ticket.Image;
 
             this.TicketWrapper = new TicketWrapper(ticket);
+            this._imageWrapper = this.TicketWrapper;
+            this.EnableTicketWrapperChangeDetection();
             base.OnPropertyChanged(nameof(this.TicketWrapper));
-            return Task.CompletedTask;
+            base.ImageErrorText = "";
+            ((DelegateCommand)UpdateCommand).RaiseCanExecuteChanged();
+        }
+
+        private void EnableTicketWrapperChangeDetection()
+        {
+            if (this.TicketWrapper == null)
+                return;
+
+            this.TicketWrapper.PropertyChanged += (s, e) =>
+            {
+                ((DelegateCommand)UpdateCommand).RaiseCanExecuteChanged();
+            };
         }
     }
 }

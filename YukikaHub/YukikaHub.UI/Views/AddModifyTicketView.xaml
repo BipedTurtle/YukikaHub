@@ -127,7 +127,7 @@
                        FontSize="32" FontWeight="Bold"/>
                 <TextBox Height="234"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         Text="{Binding TicketWrapper.Description}"
+                         Text="{Binding TicketWrapper.Description, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                          TextWrapping="Wrap" AcceptsReturn="True"/>
             </StackPanel>
         </StackPanel>
