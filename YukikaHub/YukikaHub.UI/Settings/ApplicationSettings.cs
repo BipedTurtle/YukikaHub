@@ -1,17 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace YukikaHub.UI.Settings
 {
-    public static class ApplicationSettings
+    public class ApplicationSettings : DependencyObject
     {
-        public static event Action<ApplicationMode> ModeChanged;
-        public static void RaiseModeChanged(ApplicationMode newMode)
+        public static readonly DependencyProperty IsDevModeProperty =
+            DependencyProperty.Register(
+                "IsDevMode",
+                typeof(bool),
+                typeof(ApplicationSettings),
+                new PropertyMetadata(defaultValue: false));
+
+        public bool IsDevMode
         {
-            ModeChanged?.Invoke(newMode);
+            get { return (bool)GetValue(IsDevModeProperty); }
+            set { SetValue(IsDevModeProperty, value); }
+        }
+
+        public static ApplicationSettings Instance { get; }
+        static ApplicationSettings()
+        {
+            if (Instance == null)
+                Instance = new ApplicationSettings();
         }
     } 
 

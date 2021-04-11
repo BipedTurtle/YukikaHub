@@ -43,13 +43,6 @@
                               Style="{StaticResource PopUpItem}"/>
                     <MenuItem Header="User Mode"
                               Style="{StaticResource PopUpItem}"/>
-                    <!--<MenuItem.ContextMenu>
-                        <ContextMenu Name="contextMenu">
-                            <MenuItem Header="Developer Mode"
-                                      Click="devModeMenu_Click"/>
-                            <MenuItem Header="User Mode"/>
-                        </ContextMenu>
-                    </MenuItem.ContextMenu>-->
                 </MenuItem>
             </Menu>
             <Button Width="50" Height="50"

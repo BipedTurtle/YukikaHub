@@ -109,7 +109,7 @@
                        FontSize="32"
                        Width="80"/>
                 <TextBox DockPanel.Dock="Left"
-                         Text="{Binding TicketWrapper.Price, Mode=TwoWay, UpdateSourceTrigger=LostFocus, Converter={StaticResource StringToDoubleConverter}}"/>
+                         Text="{Binding TicketWrapper.Price, Mode=TwoWay, UpdateSourceTrigger=LostFocus, Converter={StaticResource StringToDoubleConverter}, StringFormat=${0}}"/>
             </DockPanel>
             <DockPanel>
                 <Label Name="DateLabel"

@@ -15,7 +15,7 @@
 
         <Button Opacity="1"
                 Cursor="Hand"
-                Command="{Binding ModifyTicketCommand}">
+                Command="{Binding OpenTicketCommand}">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

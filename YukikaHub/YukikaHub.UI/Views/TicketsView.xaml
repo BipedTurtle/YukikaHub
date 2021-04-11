@@ -8,6 +8,7 @@
              xmlns:controls="clr-namespace:YukikaHub.UI.UserControls"
              xmlns:styling="clr-namespace:YukikaHub.UI.Attached_Properties"
              xmlns:vm="clr-namespace:YukikaHub.UI.ViewModels"
+             xmlns:settings="clr-namespace:YukikaHub.UI.Settings"
              xmlns:view="clr-namespace:YukikaHub.UI.Views"
              mc:Ignorable="d" 
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -21,7 +22,7 @@
             <Setter Property="FontFamily" Value="Lemon Milk Light"/>
         </Style>
     </UserControl.Resources>
-    
+
     <Grid Background="White"
           Margin="20">
         <ScrollViewer>
@@ -38,7 +39,7 @@
                 HorizontalAlignment="Right" VerticalAlignment="Bottom"
                 Margin="10"
                 Background="#FFFF83B0"
-                Visibility="{Binding AddButtonVisibility}"
+                Visibility="{Binding Source={x:Static settings:ApplicationSettings.Instance}, Path=IsDevMode, Converter={StaticResource BooleanToVisibilityConverter}}"
                 Command="{Binding AddMotifyTicketCommand}">
             <md:PackIcon Kind="Plus"
                          Width="30" Height="30"

@@ -56,7 +56,7 @@ namespace YukikaHub.UI.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        
         public bool HasChanges() => _ticketRepository.HasChanges();
         #endregion
 
@@ -89,26 +89,28 @@ namespace YukikaHub.UI.ViewModels
 
         public bool CanUpdate()
         {
+            bool ticketIsNew = this.TicketWrapper.Model.Id == 0;
+            bool @bool = this.HasChanges();
             return
                 !this.TicketWrapper.HasErrors &&
                 this.TicketWrapper.Image != null &&
-                this.HasChanges();
+                (this.HasChanges() || ticketIsNew);
         }
 
         public override void BrowseImage(object ImageControl)
         {
             base.BrowseImage(ImageControl);
 
-            var entry = _ticketRepository.Context.ChangeTracker.Entries<Ticket>().SingleOrDefault(e => e.Entity.Id == this.TicketWrapper.Model.Id);
-            entry.Property(t => t.Image).IsModified = true;
-
             ((DelegateCommand)UpdateCommand).RaiseCanExecuteChanged();
         }
-        #endregion
 
+        #endregion
         public static byte[] imageFirstLoaded;
         public async Task LoadAsync(object parameter)
         {
+            if (parameter == null)
+                return;
+
             var ticket = parameter as Ticket;
             if (ticket.Id != 0)
                 ticket = await _ticketRepository.GetByIdAsync(ticket.Id);

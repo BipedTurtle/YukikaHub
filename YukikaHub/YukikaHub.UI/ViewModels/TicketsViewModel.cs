@@ -26,7 +26,6 @@ namespace YukikaHub.UI.ViewModels
         {
             _eventAggregator = eventAggregator;
             _ticketRepository = ticketRepository;
-            ApplicationSettings.ModeChanged += this.OnModeChanged;
 
             this.AddMotifyTicketCommand = new DelegateCommand(AddMotifyTicket_Execute);
 
@@ -78,8 +77,8 @@ namespace YukikaHub.UI.ViewModels
         }
         private void OnSelectedDetailViewChanged(DetailViewChangedEventArgs e)
         {
-            if (e.ViewModelName != nameof(TicketsViewModel))
-                ApplicationSettings.ModeChanged -= this.OnModeChanged;
+            //if (e.ViewModelName != nameof(TicketsViewModel))
+            //    ApplicationSettings.ModeChanged -= this.OnModeChanged;
         }
         #endregion
 

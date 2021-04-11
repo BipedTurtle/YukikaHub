@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using YukikaHub.Model;
 using YukikaHub.UI.Events;
+using YukikaHub.UI.Settings;
 
 namespace YukikaHub.UI.ViewModels
 {
@@ -21,7 +22,7 @@ namespace YukikaHub.UI.ViewModels
             _ticket = ticket;
             _eventAggregator = eventAggregator;
 
-            this.ModifyTicketCommand = new DelegateCommand(this.ModifyTicket);
+            this.OpenTicketCommand = new DelegateCommand(this.OpenTicket);
         }
 
         #region Properties
@@ -37,15 +38,20 @@ namespace YukikaHub.UI.ViewModels
         #endregion
 
         #region Commands
-        public ICommand ModifyTicketCommand { get; set; }
+        public ICommand OpenTicketCommand { get; set; }
         #endregion
 
         #region Command Handlers
-        public void ModifyTicket()
+        public void OpenTicket()
         {
+            var viewModleName =
+                ApplicationSettings.Instance.IsDevMode ?
+                    nameof(AddModifyTicketViewModel) :
+                    "TicketFormViewModel";
+
             _eventAggregator
                 .GetEvent<SelectedDetailViewChangedEvent>()
-                .Publish(new DetailViewChangedEventArgs(nameof(AddModifyTicketViewModel), this.Ticket));
+                .Publish(new DetailViewChangedEventArgs(viewModleName, this.Ticket));
         }
         #endregion
     }

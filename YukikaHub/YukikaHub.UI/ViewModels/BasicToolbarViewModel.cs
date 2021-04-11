@@ -32,7 +32,7 @@ namespace YukikaHub.UI.ViewModels
         #region Command Handlers
         public void SwitchToDevMode_Execute()
         {
-            ApplicationSettings.RaiseModeChanged(ApplicationMode.Developer);
+            ApplicationSettings.Instance.IsDevMode = true;
         }
         #endregion
     }
