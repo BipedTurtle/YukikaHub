@@ -5,13 +5,19 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:styling="clr-namespace:YukikaHub.UI.Attached_Properties"
-             xmlns:local="clr-namespace:YukikaHub.UI.Views"
+             xmlns:att="clr-namespace:YukikaHub.UI.Attached_Properties"
+             xmlns:local="clr-namespace:YukikaHub.UI.Views" xmlns:usercontrols="clr-namespace:YukikaHub.UI.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="910" d:DesignWidth="1020">
     <UserControl.Resources>
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="32"/>
             <Setter Property="FontFamily" Value="Arial Rounded MT Bold"/>
+        </Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+            <Setter Property="FontSize" Value="32"/>
+            <Setter Property="FontFamily" Value="KBIZgo B"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
     </UserControl.Resources>
     <Grid Background="White"
@@ -35,14 +41,12 @@
                 <Label Content="Purchaser Name: "
                        FontSize="32"
                        DockPanel.Dock="Left"/>
-                <TextBox Style="{StaticResource MaterialDesignTextBox}"
-                         DockPanel.Dock="Left"/>
+                <TextBox DockPanel.Dock="Left"
+                         d:Text="kika"/>
             </DockPanel>
-            <DockPanel>
-                <Label DockPanel.Dock="Left"
-                       Content="Number of Tickets: "/>
-                <TextBox Style="{StaticResource MaterialDesignTextBox}"/>
-            </DockPanel>
+            <usercontrols:NumericCounterInt Height="50"
+                                            att:Counter.Label="#Tickets"
+                                            FontWeight="Medium"/>
             <DockPanel>
                 <Label DockPanel.Dock="Left"
                        Content="Date: "/>

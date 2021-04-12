@@ -16,4 +16,7 @@
     <DataTemplate DataType="{x:Type vm:AddModifyTicketViewModel}">
         <view:AddModifyTicketView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:TicketFormsViewModel}">
+        <view:TicketFormsView/>
+    </DataTemplate>
 </ResourceDictionary>

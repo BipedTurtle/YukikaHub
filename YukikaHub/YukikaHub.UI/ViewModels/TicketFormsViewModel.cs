@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace YukikaHub.UI.ViewModels
 {
-    public class TicketFormsViewModel : ViewModelBase
+    public class TicketFormsViewModel : ViewModelBase, IDetailViewModel
     {
-        
+        public Task LoadAsync(object parameter)
+        {
+            return Task.CompletedTask;
+        }
     }
 }

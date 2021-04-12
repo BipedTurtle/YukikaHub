@@ -47,7 +47,7 @@ namespace YukikaHub.UI.ViewModels
             var viewModleName =
                 ApplicationSettings.Instance.IsDevMode ?
                     nameof(AddModifyTicketViewModel) :
-                    "TicketFormViewModel";
+                    nameof(TicketFormsViewModel);
 
             _eventAggregator
                 .GetEvent<SelectedDetailViewChangedEvent>()
