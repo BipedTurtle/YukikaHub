@@ -1,17 +1,12 @@
 ﻿using Prism.Commands;
 using Prism.Events;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using YukikaHub.Model;
 using YukikaHub.UI.Data;
 using YukikaHub.UI.Events;
-using YukikaHub.UI.Settings;
 
 namespace YukikaHub.UI.ViewModels
 {
@@ -28,10 +23,6 @@ namespace YukikaHub.UI.ViewModels
             _ticketRepository = ticketRepository;
 
             this.AddMotifyTicketCommand = new DelegateCommand(AddMotifyTicket_Execute);
-
-            _eventAggregator
-                .GetEvent<SelectedDetailViewChangedEvent>()
-                .Subscribe(OnSelectedDetailViewChanged);
         }
 
         #region Properties
@@ -61,25 +52,7 @@ namespace YukikaHub.UI.ViewModels
         #endregion
 
         #region Event Handlers
-        private void OnModeChanged(ApplicationMode newMode)
-        {
-            switch (newMode)
-            {
-                case ApplicationMode.Developer:
-                    this.AddButtonVisibility = Visibility.Visible;
-                    break;
-                case ApplicationMode.User:
-                    this.AddButtonVisibility = Visibility.Hidden;
-                    break;
-                default:
-                    break;
-            }
-        }
-        private void OnSelectedDetailViewChanged(DetailViewChangedEventArgs e)
-        {
-            //if (e.ViewModelName != nameof(TicketsViewModel))
-            //    ApplicationSettings.ModeChanged -= this.OnModeChanged;
-        }
+
         #endregion
 
         public async Task LoadAsync(object parameter)
