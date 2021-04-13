@@ -21,13 +21,25 @@ namespace YukikaHub.UI.ViewModels
             }
         }
 
-        private double _count;
+        private double _count = 1;
         public double Count
         {
             get => _count;
             set
             {
                 _count = value;
+                base.OnPropertyChanged();
+                this.TotalPrice = _count * this.Ticket.Price;
+            }
+        }
+
+        private double _totalPrice;
+        public double TotalPrice
+        {
+            get => _totalPrice;
+            set
+            {
+                _totalPrice = value;
                 base.OnPropertyChanged();
             }
         }
@@ -36,6 +48,8 @@ namespace YukikaHub.UI.ViewModels
         {
             var ticket = (Ticket)parameter;
             _ticket = new TicketWrapper(ticket);
+
+            this.TotalPrice = _count * this.Ticket.Price;
             return Task.CompletedTask;
         }
     }
