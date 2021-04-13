@@ -45,7 +45,6 @@ namespace YukikaHub.UI.UserControls
         public NumericCounterInt()
         {
             InitializeComponent();
-
         }
 
         private void Increment_Click(object sender, RoutedEventArgs e)
@@ -60,7 +59,8 @@ namespace YukikaHub.UI.UserControls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContext = this;
+            var overallContext = DataContext;
+            var context = textbox.DataContext;
         }
     }
 }

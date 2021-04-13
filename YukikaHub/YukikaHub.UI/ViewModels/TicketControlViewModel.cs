@@ -44,14 +44,14 @@ namespace YukikaHub.UI.ViewModels
         #region Command Handlers
         public void OpenTicket()
         {
-            var viewModleName =
+            var viewModelName =
                 ApplicationSettings.Instance.IsDevMode ?
                     nameof(AddModifyTicketViewModel) :
                     nameof(TicketFormsViewModel);
 
             _eventAggregator
                 .GetEvent<SelectedDetailViewChangedEvent>()
-                .Publish(new DetailViewChangedEventArgs(viewModleName, this.Ticket));
+                .Publish(new DetailViewChangedEventArgs(viewModelName, this.Ticket));
         }
         #endregion
     }

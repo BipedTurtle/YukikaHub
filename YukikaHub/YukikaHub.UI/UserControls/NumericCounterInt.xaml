@@ -28,6 +28,8 @@
                    VerticalAlignment="Center"
                    Margin="10 0"/>
         <TextBox Grid.Column="1"
+                 Name="textbox"
+                 DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
                  Text="{Binding Count, Mode=TwoWay, Converter={StaticResource StringToDoubleConverter}}"
                  Margin="10 0"
                  FontSize="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=FontSize}"

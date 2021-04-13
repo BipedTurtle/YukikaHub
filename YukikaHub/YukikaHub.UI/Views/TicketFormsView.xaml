@@ -46,7 +46,8 @@
             </DockPanel>
             <usercontrols:NumericCounterInt Height="50"
                                             att:Counter.Label="#Tickets"
-                                            FontWeight="Medium"/>
+                                            FontWeight="Medium"
+                                            Count="{Binding Count, Mode=TwoWay}"/>
             <DockPanel>
                 <Label DockPanel.Dock="Left"
                        Content="Date: "/>
@@ -60,7 +61,8 @@
                 <Label Content="Price Per Ticket: "
                         DockPanel.Dock="Left"/>
                 <Label d:Content="$32"
-                        DockPanel.Dock="Left"/>
+                       Content="{Binding Ticket.Price}"
+                       DockPanel.Dock="Left"/>
             </DockPanel>
             <DockPanel HorizontalAlignment="Right">
                 <Label Content="TOTAL: "
