@@ -7,6 +7,7 @@
              xmlns:controls="clr-namespace:YukikaHub.UI.UserControls"
              xmlns:styling="clr-namespace:YukikaHub.UI.Attached_Properties"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:s="clr-namespace:YukikaHub.UI.Settings"
              xmlns:vm="clr-namespace:YukikaHub.UI.ViewModels"
              xmlns:model="clr-namespace:YukikaHub.Model;assembly=YukikaHub.Model"
              mc:Ignorable="d" 
@@ -36,7 +37,8 @@
                 HorizontalAlignment="Right" VerticalAlignment="Bottom"
                 Margin="10"
                 Background="#FFFF83B0"
-                Visibility="Visible"
+                d:Visibility="Visible"
+                Visibility="{Binding Source={x:Static s:ApplicationSettings.Instance}, Path=IsDevMode, Converter={StaticResource BooleanToVisibilityConverter}}"
                 Command="{Binding AddAlbumCommand}">
             <md:PackIcon Kind="Plus"
                          Width="30" Height="30"

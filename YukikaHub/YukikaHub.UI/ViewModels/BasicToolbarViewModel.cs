@@ -20,19 +20,26 @@ namespace YukikaHub.UI.ViewModels
             _eventAggregator = eventAggregator;
 
             this.SwitchToDevModeCommand = new DelegateCommand(this.SwitchToDevMode_Execute);
+            this.SwitchToUserModeCommand = new DelegateCommand(this.SwitchToUserMode);
         }
+
 
         #region Event Handlers
         #endregion
 
         #region Commands
         public ICommand SwitchToDevModeCommand { get; set; }
+        public ICommand SwitchToUserModeCommand { get; set; }
         #endregion
 
         #region Command Handlers
         public void SwitchToDevMode_Execute()
         {
             ApplicationSettings.Instance.IsDevMode = true;
+        }
+        public void SwitchToUserMode()
+        {
+            ApplicationSettings.Instance.IsDevMode = false;
         }
         #endregion
     }

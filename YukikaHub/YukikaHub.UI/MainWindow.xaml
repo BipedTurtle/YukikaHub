@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:s="clr-namespace:YukikaHub.UI.Settings"
         xmlns:local="clr-namespace:YukikaHub.UI"
         xmlns:controls="clr-namespace:YukikaHub.UI.UserControls" 
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -23,6 +24,25 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="910"/>
             </Grid.RowDefinitions>
+
+            <TextBlock d:Text="Dev mode"
+                   FontSize="24" Foreground="White"
+                   Margin="10 8 0 0"
+                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                   Panel.ZIndex="2">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Source={x:Static s:ApplicationSettings.Instance}, Path=IsDevMode}" Value="True">
+                                <Setter Property="Text" Value="Developer Mode"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Source={x:Static s:ApplicationSettings.Instance}, Path=IsDevMode}" Value="False">
+                                <Setter Property="Text" Value=""/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
 
             <controls:TopBar x:Name="TopBar"
                              Grid.ColumnSpan="2"
