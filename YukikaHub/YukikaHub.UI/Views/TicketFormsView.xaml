@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:command="clr-namespace:YukikaHub.UI.Global_Commands"
+             xmlns:vm="clr-namespace:YukikaHub.UI.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:styling="clr-namespace:YukikaHub.UI.Attached_Properties"
              xmlns:att="clr-namespace:YukikaHub.UI.Attached_Properties"
@@ -26,9 +28,24 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
+        
+        <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                Margin="20"
+                VerticalAlignment="Top" HorizontalAlignment="Left"
+                Width="50" Height="50"
+                Panel.ZIndex="1" Background="#FFF78E7D"
+                Command="command:NavigationCommands.BackCommand"
+                CommandParameter="{x:Type vm:TicketsViewModel}">
+            <md:PackIcon Kind="ArrowBack"
+                         Width="35" Height="35"         
+                         Foreground="White"/>
+        </Button>
+
         <StackPanel>
             <Image d:Source="/Images/Lovemonth.jpg"
-                   Stretch="UniformToFill"/>
+                   Source="{Binding Ticket.Image, Converter={StaticResource BytesToBitmapImageConverter}}"
+                   Stretch="UniformToFill"
+                   Height="400"/>
             <Label d:Content="Lovemonth Mini Conert"
                    FontSize="28" FontFamily="Arial Rounded MT Bold"
                    HorizontalAlignment="Center"
@@ -52,7 +69,8 @@
             <DockPanel>
                 <Label DockPanel.Dock="Left"
                        Content="Date: "/>
-                <Label d:Content="4/15/2021"/>
+                <Label d:Content="4/15/2021"
+                       Content="{Binding Ticket.Date}"/>
             </DockPanel>
         </StackPanel>
         <StackPanel VerticalAlignment="Bottom"
