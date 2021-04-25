@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:s="clr-namespace:YukikaHub.UI.Settings"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:YukikaHub.UI.UserControls" xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
@@ -40,10 +41,12 @@
                         </StackPanel>
                     </MenuItem.Header>
                     <MenuItem Header="Dev Mode"
-                              Command="{Binding SwitchToDevModeCommand}"
+                              Command="{Binding SwitchDevModeCommand}"
+                              CommandParameter="True"
                               Style="{StaticResource PopUpItem}"/>
                     <MenuItem Header="User Mode"
-                              Command="{Binding SwitchToUserModeCommand}"
+                              Command="{Binding SwitchDevModeCommand}"
+                              CommandParameter="False"
                               Style="{StaticResource PopUpItem}"/>
                 </MenuItem>
             </Menu>

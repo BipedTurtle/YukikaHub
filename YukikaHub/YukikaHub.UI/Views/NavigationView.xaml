@@ -54,7 +54,7 @@
                     <TextBlock Text="TICKETS"/>
                 </StackPanel>
             </ListViewItem>
-            <ListViewItem>
+            <ListViewItem Tag="{x:Type vm:KikaEventsViewModel}">
                 <StackPanel Orientation="Horizontal">
                     <md:PackIcon Kind="Event"/>
                     <TextBlock Text="EVENTS WITH KIKA"

@@ -19,8 +19,7 @@ namespace YukikaHub.UI.ViewModels
         {
             _eventAggregator = eventAggregator;
 
-            this.SwitchToDevModeCommand = new DelegateCommand(this.SwitchToDevMode_Execute);
-            this.SwitchToUserModeCommand = new DelegateCommand(this.SwitchToUserMode);
+            this.SwitchDevModeCommand = new DelegateCommand<object>(this.SwitchDevMode_Execute);
         }
 
 
@@ -28,18 +27,19 @@ namespace YukikaHub.UI.ViewModels
         #endregion
 
         #region Commands
-        public ICommand SwitchToDevModeCommand { get; set; }
-        public ICommand SwitchToUserModeCommand { get; set; }
+        public ICommand SwitchDevModeCommand { get; set; }
         #endregion
 
         #region Command Handlers
-        public void SwitchToDevMode_Execute()
+        public void SwitchDevMode_Execute(object turnDevModeOn)
         {
-            ApplicationSettings.Instance.IsDevMode = true;
-        }
-        public void SwitchToUserMode()
-        {
-            ApplicationSettings.Instance.IsDevMode = false;
+            var stringFormat = (string)turnDevModeOn;
+            bool parseSucceeded = bool.TryParse(stringFormat, out bool result);
+
+            if (!parseSucceeded)
+                throw new ArgumentException($"the string '{stringFormat}' cannot be converted to a boolean value. Check for typo");
+
+            ApplicationSettings.Instance.IsDevMode = result;
         }
         #endregion
     }

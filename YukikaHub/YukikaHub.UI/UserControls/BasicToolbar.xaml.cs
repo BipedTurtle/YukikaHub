@@ -45,7 +45,7 @@ namespace YukikaHub.UI.UserControls
         {
             var vm = (BasicToolbarViewModel)menuItem.DataContext;
 
-            vm.SwitchToDevModeCommand.Execute(null);
+            vm.SwitchDevModeCommand.Execute(null);
         }
     }
 }
